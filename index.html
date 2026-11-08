@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免費線上 HTML 表格製作器｜Excel 轉 RWD 網頁表格、WordPress 表格工具｜WUMETAX</title>
+<meta name="description" content="免費使用 WUMETAX TableCraft 網頁表格製作器，支援 Excel 複製貼上、CSV 匯入、視覺化表格編輯、樣式設計及手機版 RWD 預覽，一鍵產生適用 WordPress Gutenberg 的 HTML/CSS 表格程式碼，資料在瀏覽器本機處理，無需安裝軟體。">
+<link rel="canonical" href="https://tablecraft.wumetax.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WUMETAX TableCraft｜免費線上 HTML 與 WordPress RWD 表格製作工作站">
+<meta property="og:description" content="支援 Excel 複製貼上、CSV 匯入、視覺化樣式調整與三種手機版 RWD 模式，一鍵輸出乾淨、語意化且不污染全域的 WordPress HTML/CSS 程式碼。">
+<meta property="og:url" content="https://tablecraft.wumetax.com/">
+<meta property="og:site_name" content="WUMETAX Lab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WUMETAX TableCraft｜網頁表格製作工作站">
+<meta name="twitter:description" content="Excel/CSV 轉 RWD 響應式網頁表格，專為 WordPress Gutenberg 最佳化，100% 瀏覽器本機運算。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111827'/><path d='M6 10h20M6 16h20M6 22h20M12 10v16M20 10v16' stroke='%233B82F6' stroke-width='2.2' stroke-linecap='round'/><rect x='6' y='6' width='20' height='20' rx='3' stroke='%23ffffff' stroke-width='2' fill='none'/></svg>">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "WUMETAX TableCraft 網頁表格製作工作站",
+  "operatingSystem": "Web Browser",
+  "applicationCategory": "DeveloperApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "TWD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "WUMETAX",
+    "url": "https://wumetax.com/"
+  },
+  "description": "免費線上 HTML 表格製作器，支援 Excel 貼上、CSV 匯入、RWD 手機版轉換與 WordPress Gutenberg 程式碼輸出。"
+}
+</script>
+<style>
+:root {
+  --nav-bg: #111827;
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --primary-light: #EFF6FF;
+  --bg-page: #F3F4F6;
+  --bg-card: #FFFFFF;
+  --border: #E5E7EB;
+  --border-strong: #D1D5DB;
+  --text-main: #111827;
+  --text-sub: #374151;
+  --text-muted: #6B7280;
+  --success: #16A34A;
+  --warning: #D97706;
+  --danger: #DC2626;
+  --font-sans: "Outfit", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 8px;
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+button, input, select, textarea {
+  font-family: inherit; font-size: inherit; color: inherit;
+}
+button {
+  cursor: pointer; border: 1px solid transparent; background: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 6px 12px; border-radius: 6px; font-weight: 500;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--primary); outline-offset: 1px;
+}
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+.btn-secondary { background: #fff; border-color: var(--border-strong); color: var(--text-main); }
+.btn-secondary:hover:not(:disabled) { background: #F9FAFB; border-color: #9CA3AF; }
+.btn-ghost { color: #D1D5DB; padding: 6px 10px; }
+.btn-ghost:hover:not(:disabled) { background: rgba(255,255,255,0.1); color: #fff; }
+.btn-danger { background: #FEF2F2; border-color: #FECACA; color: var(--danger); }
+.btn-danger:hover:not(:disabled) { background: #FEE2E2; }
+.btn-sm { padding: 4px 8px; font-size: 12px; border-radius: 5px; }
+.icon { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+/* Top Navbar */
+.app-header {
+  background: var(--nav-bg); color: #fff;
+  height: 56px; padding: 0 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.brand-group { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.brand-logo {
+  display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px; color: #fff; text-decoration: none; white-space: nowrap;
+}
+.brand-badge {
+  font-size: 11px; background: rgba(59,130,246,0.2); color: #93C5FD;
+  padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(59,130,246,0.4);
+}
+.project-bar { display: flex; align-items: center; gap: 6px; }
+.project-select {
+  background: #1F2937; color: #F9FAFB; border: 1px solid #374151;
+  padding: 5px 8px; border-radius: 6px; font-size: 13px; max-width: 170px;
+}
+.project-name-input {
+  background: #1F2937; color: #fff; border: 1px solid #374151;
+  padding: 5px 10px; border-radius: 6px; font-size: 13px; width: 160px;
+}
+.header-actions { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+.save-indicator { font-size: 12px; color: #9CA3AF; white-space: nowrap; margin-right: 4px; }
+
+/* Mobile Tab Navigation */
+.mobile-tabs {
+  display: none; background: #fff; border-bottom: 1px solid var(--border);
+  position: sticky; top: 56px; z-index: 90;
+}
+.mobile-tabs button {
+  flex: 1; border-radius: 0; padding: 10px 4px; font-size: 13px;
+  border-bottom: 2px solid transparent; color: var(--text-sub);
+}
+.mobile-tabs button.active {
+  color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; background: var(--primary-light);
+}
+
+/* Main Workspace Layout */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(380px, 43fr) minmax(360px, 37fr) 330px;
+  gap: 14px;
+  padding: 14px;
+  max-width: 1920px;
+  margin: 0 auto;
+  align-items: start;
+}
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: #FAFAFA;
+}
+.panel-title { font-weight: 600; font-size: 14px; color: var(--text-main); display: flex; align-items: center; gap: 6px; margin: 0; }
+.panel-body { padding: 14px; }
+
+/* Left Panel: Data & Grid Editor */
+.toolbar-row {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.search-drawer {
+  background: #F9FAFB; border: 1px solid var(--border); border-radius: 6px;
+  padding: 10px; margin-bottom: 10px; display: none;
+}
+.search-drawer.open { display: block; }
+.form-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.form-row:last-child { margin-bottom: 0; }
+.input-text, .select-box {
+  border: 1px solid var(--border-strong); border-radius: 6px; padding: 5px 9px;
+  background: #fff; font-size: 13px; color: var(--text-main);
+}
+.input-sm { padding: 4px 7px; font-size: 12px; }
+
+/* Data Grid Wrapper */
+.grid-container {
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  overflow: auto;
+  max-height: 540px;
+  background: #fff;
+  position: relative;
+}
+.editor-grid {
+  border-collapse: separate; border-spacing: 0;
+  width: max-content; min-width: 100%;
+  font-size: 13px;
+}
+.editor-grid th, .editor-grid td {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0; margin: 0;
+  position: relative;
+}
+.editor-grid thead th {
+  background: #F3F4F6; color: var(--text-sub);
+  position: sticky; top: 0; z-index: 10;
+  font-weight: 600; user-select: none;
+}
+.editor-grid .row-num-col {
+  width: 42px; min-width: 42px; text-align: center;
+  background: #F9FAFB; color: var(--text-muted); font-size: 12px;
+  position: sticky; left: 0; z-index: 5;
+  user-select: none;
+}
+.editor-grid thead .row-num-col { z-index: 15; background: #E5E7EB; }
+.col-header-box {
+  padding: 6px 8px; min-width: 130px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.col-header-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 4px;
+}
+.col-title-badge {
+  font-size: 11px; color: var(--text-muted); background: #E5E7EB;
+  padding: 1px 5px; border-radius: 3px; cursor: pointer;
+}
+.col-header-controls {
+  display: flex; align-items: center; gap: 3px;
+}
+.col-type-badge {
+  font-size: 11px; padding: 2px 6px; border-radius: 4px;
+  background: #fff; border: 1px solid var(--border-strong); color: var(--text-sub);
+  cursor: pointer; width: 100%; text-align: left; justify-content: space-between;
+}
+.col-type-badge:hover { border-color: var(--primary); color: var(--primary); }
+.cell-wrap {
+  min-width: 130px; min-height: 34px;
+}
+.cell-input {
+  width: 100%; min-height: 34px; height: 100%;
+  border: none; padding: 6px 8px; background: transparent;
+  font-size: 13px; line-height: 1.4; color: var(--text-main);
+  display: block; resize: none; overflow: hidden;
+}
+.cell-input:focus {
+  outline: 2px solid var(--primary); outline-offset: -2px;
+  background: #EFF6FF;
+}
+.editor-grid tr.is-header-row td .cell-input {
+  font-weight: 600; background: #F8FAFC;
+}
+.editor-grid tr.selected-row td { background: #EFF6FF; }
+.editor-grid td.selected-col, .editor-grid th.selected-col { background: #EFF6FF; }
+.grid-footer-bar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  margin-top: 10px; font-size: 12px; color: var(--text-muted);
+}
+
+/* Column Config Inspector Drawer */
+.col-inspector {
+  margin-top: 12px; padding: 12px; background: #F8FAFC;
+  border: 1px solid #CBD5E1; border-radius: 6px;
+}
+.col-inspector-title {
+  font-weight: 600; font-size: 13px; margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.inspector-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px;
+}
+.field-group { display: flex; flex-direction: column; gap: 4px; }
+.field-label { font-size: 12px; color: var(--text-sub); font-weight: 500; }
+
+/* Center Panel: Live Preview & Export */
+.preview-toolbar {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+.viewport-switcher {
+  display: inline-flex; background: #E5E7EB; padding: 3px; border-radius: 6px; gap: 2px;
+}
+.viewport-switcher button {
+  padding: 4px 10px; font-size: 12px; border-radius: 4px; color: var(--text-sub);
+}
+.viewport-switcher button.active {
+  background: #fff; color: var(--text-main); box-shadow: var(--shadow-sm); font-weight: 600;
+}
+.preview-stage-outer {
+  background: #E5E7EB;
+  padding: 18px;
+  overflow-x: auto;
+  min-height: 360px;
+  display: flex; justify-content: center; align-items: flex-start;
+  border-bottom: 1px solid var(--border);
+}
+.preview-viewport {
+  background: #FFFFFF;
+  width: 100%;
+  transition: width 0.2s ease;
+  box-shadow: var(--shadow-md);
+  border-radius: 6px;
+  padding: 20px;
+  overflow: hidden;
+}
+.preview-empty-state {
+  text-align: center; padding: 48px 20px; color: var(--text-muted);
+}
+
+/* Right Panel: Style & Settings Tabs */
+.settings-tabs {
+  display: flex; border-bottom: 1px solid var(--border); background: #F9FAFB;
+}
+.settings-tabs button {
+  flex: 1; padding: 9px 4px; font-size: 12px; border-radius: 0;
+  border-bottom: 2px solid transparent; color: var(--text-sub);
+}
+.settings-tabs button.active {
+  border-bottom-color: var(--primary); color: var(--primary); background: #fff; font-weight: 600;
+}
+.settings-section { display: none; padding: 14px; max-height: 750px; overflow-y: auto; }
+.settings-section.active { display: block; }
+.preset-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;
+}
+.preset-card {
+  border: 1px solid var(--border-strong); border-radius: 6px; padding: 8px 10px;
+  text-align: left; display: flex; flex-direction: column; gap: 4px; background: #fff;
+}
+.preset-card:hover { border-color: var(--primary); }
+.preset-card.active { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 1px var(--primary); }
+.preset-swatch { display: flex; gap: 4px; align-items: center; }
+.swatch-dot { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); }
+.color-picker-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  margin-bottom: 8px;
+}
+.color-input-pair { display: flex; align-items: center; gap: 6px; }
+.color-input-pair input[type="color"] {
+  width: 28px; height: 28px; padding: 0; border: 1px solid var(--border-strong);
+  border-radius: 4px; cursor: pointer; background: none;
+}
+.color-input-pair input[type="text"] { width: 82px; font-family: monospace; text-transform: uppercase; }
+.setting-group {
+  margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+}
+.setting-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.setting-group-title { font-weight: 600; font-size: 13px; margin: 0 0 10px 0; color: var(--text-main); }
+.checkbox-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px; cursor: pointer; font-size: 13px;
+}
+
+/* Code Export Area */
+.export-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.export-tab-btn {
+  padding: 6px 12px; border: 1px solid var(--border-strong); border-radius: 6px;
+  font-size: 13px; background: #fff; color: var(--text-sub);
+}
+.export-tab-btn.active {
+  background: var(--nav-bg); color: #fff; border-color: var(--nav-bg);
+}
+.code-box-wrap { position: relative; margin-bottom: 10px; }
+.code-textarea {
+  width: 100%; height: 190px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px; line-height: 1.5; background: #111827; color: #E5E7EB;
+  border: 1px solid #374151; border-radius: 6px; padding: 12px; resize: vertical;
+}
+.notice-box {
+  padding: 10px 12px; border-radius: 6px; font-size: 12.5px; margin-bottom: 10px;
+  border: 1px solid var(--border); background: #F9FAFB; color: var(--text-sub);
+}
+.notice-info { background: #EFF6FF; border-color: #BFDBFE; color: #1E40AF; }
+.notice-warn { background: #FFFBEB; border-color: #FDE68A; color: #92400E; }
+
+/* Modals */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(17,24,39,0.6);
+  display: none; align-items: center; justify-content: center;
+  z-index: 200; padding: 16px;
+}
+.modal-backdrop.open { display: flex; }
+.modal-card {
+  background: #fff; border-radius: 10px; max-width: 680px; width: 100%;
+  max-height: 90vh; display: flex; flex-direction: column;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15); overflow: hidden;
+}
+.modal-header {
+  padding: 14px 18px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-header h3 { margin: 0; font-size: 16px; }
+.modal-body { padding: 18px; overflow-y: auto; }
+.modal-footer {
+  padding: 12px 18px; border-top: 1px solid var(--border); background: #F9FAFB;
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+}
+
+/* Toast Notification */
+.toast-container {
+  position: fixed; bottom: 20px; right: 20px; z-index: 300;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.toast-item {
+  background: #111827; color: #fff; padding: 10px 14px; border-radius: 6px;
+  box-shadow: var(--shadow-md); font-size: 13px; display: flex; align-items: center; gap: 8px;
+  border-left: 4px solid var(--primary);
+}
+.toast-item.success { border-left-color: var(--success); }
+.toast-item.warn { border-left-color: var(--warning); }
+.toast-item.error { border-left-color: var(--danger); }
+
+/* SEO & Documentation Footer Content */
+.seo-doc-section {
+  max-width: 1280px; margin: 32px auto; padding: 0 16px;
+}
+.seo-card {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; margin-bottom: 20px;
+}
+.seo-card h1 { font-size: 22px; margin: 0 0 12px 0; color: var(--text-main); }
+.seo-card h2 { font-size: 17px; margin: 20px 0 10px 0; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.seo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 14px; }
+.faq-item { margin-bottom: 14px; }
+.faq-q { font-weight: 600; color: var(--text-main); margin-bottom: 4px; }
+.faq-a { color: var(--text-sub); font-size: 13.5px; margin: 0; }
+.site-footer {
+  background: var(--nav-bg); color: #9CA3AF; padding: 24px 16px; text-align: center; font-size: 13px;
+}
+.site-footer a { color: #E5E7EB; text-decoration: none; margin: 0 8px; }
+.site-footer a:hover { color: var(--primary); text-decoration: underline; }
+
+/* Responsive Workspace Breakpoints */
+@media (max-width: 1200px) {
+  .workspace { grid-template-columns: 1fr 1fr; }
+  .panel-style { grid-column: span 2; }
+}
+@media (max-width: 860px) {
+  .app-header { height: auto; padding: 10px 12px; flex-wrap: wrap; }
+  .mobile-tabs { display: flex; }
+  .workspace { grid-template-columns: 1fr; padding: 10px; }
+  .panel-style { grid-column: span 1; }
+  .workspace[data-mobile-view="data"] .panel-preview,
+  .workspace[data-mobile-view="data"] .panel-style { display: none; }
+  .workspace[data-mobile-view="preview"] .panel-data,
+  .workspace[data-mobile-view="preview"] .panel-style { display: none; }
+  .workspace[data-mobile-view="style"] .panel-data,
+  .workspace[data-mobile-view="style"] .panel-preview { display: none; }
+  .workspace[data-mobile-view="export"] .panel-data,
+  .workspace[data-mobile-view="export"] .panel-style { display: none; }
+}
+
+/* Print Style Mode */
+@media print {
+  .app-header, .mobile-tabs, .panel-data, .panel-style, .preview-toolbar,
+  .export-panel-card, .seo-doc-section, .site-footer, .toast-container {
+    display: none !important;
+  }
+  body, .workspace, .panel-preview, .preview-stage-outer, .preview-viewport {
+    background: #fff !important; border: none !important; box-shadow: none !important;
+    padding: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<header class="app-header">
+  <div class="brand-group">
+    <a href="https://tablecraft.wumetax.com/" class="brand-logo" aria-label="WUMETAX TableCraft">
+      <svg class="icon" style="width:22px;height:22px;stroke:#3B82F6;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+      <span>TableCraft</span>
+    </a>
+    <span class="brand-badge">WUMETAX Lab</span>
+    <div class="project-bar">
+      <select id="projectSelect" class="project-select" title="切換專案" aria-label="切換專案"></select>
+      <input type="text" id="projectNameInput" class="project-name-input" placeholder="專案名稱" aria-label="目前專案名稱">
+      <button type="button" class="btn-ghost btn-sm" id="btnNewProject" title="新建專案">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>新專案
+      </button>
+      <button type="button" class="btn-ghost btn-sm" id="btnDuplicateProject" title="複製目前專案">複製</button>
+      <button type="button" class="btn-ghost btn-sm" id="btnDeleteProject" title="刪除目前專案">刪除</button>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <span id="saveStatusText" class="save-indicator">本機已就緒</span>
+    <button type="button" class="btn-ghost btn-sm" id="btnUndo" title="復原 (Ctrl+Z)" disabled>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>復原
+    </button>
+    <button type="button" class="btn-ghost btn-sm" id="btnRedo" title="重做 (Ctrl+Y)" disabled>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>重做
+    </button>
+    <button type="button" class="btn-secondary btn-sm" id="btnOpenImportModal">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>匯入 Excel / CSV
+    </button>
+    <button type="button" class="btn-secondary btn-sm" id="btnLoadDemo">載入範例</button>
+    <button type="button" class="btn-primary btn-sm" id="btnSaveProject">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>儲存
+    </button>
+  </div>
+</header>
+
+<!-- Mobile View Switcher -->
+<nav class="mobile-tabs" aria-label="手機版工作區切換">
+  <button type="button" class="active" data-mobile-tab="data">1. 資料編輯</button>
+  <button type="button" data-mobile-tab="style">2. 外觀與 RWD</button>
+  <button type="button" data-mobile-tab="preview">3. 即時預覽</button>
+  <button type="button" data-mobile-tab="export">4. 匯出程式碼</button>
+</nav>
+
+<!-- Main 3-Column Workstation -->
+<main class="workspace" id="workspaceRoot" data-mobile-view="data">
+
+  <!-- LEFT PANEL: Data Editor -->
+  <section class="panel panel-data" aria-label="資料表格編輯區">
+    <div class="panel-header">
+      <h2 class="panel-title">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        資料編輯與欄位設定
+      </h2>
+      <div style="display:flex;gap:6px;">
+        <button type="button" class="btn-secondary btn-sm" id="btnToggleSearch">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>搜尋/取代
+        </button>
+        <button type="button" class="btn-danger btn-sm" id="btnClearTable">清空表格</button>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <!-- Grid Action Toolbar -->
+      <div class="toolbar-row">
+        <button type="button" class="btn-secondary btn-sm" id="btnInsertRowAbove">+ 上方插入列</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnInsertRowBelow">+ 下方插入列</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnDuplicateRow">複製列</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnMoveRowUp" title="上移選取列">↑ 列上移</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnMoveRowDown" title="下移選取列">↓ 列下移</button>
+        <button type="button" class="btn-danger btn-sm" id="btnDeleteRow">刪除列</button>
+        <span style="color:var(--border-strong)">|</span>
+        <button type="button" class="btn-secondary btn-sm" id="btnInsertColLeft">+ 左側插入欄</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnInsertColRight">+ 右側插入欄</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnMoveColLeft" title="左移選取欄">← 欄左移</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnMoveColRight" title="右移選取欄">→ 欄右移</button>
+        <button type="button" class="btn-danger btn-sm" id="btnDeleteCol">刪除欄</button>
+      </div>
+
+      <!-- Search and Replace Drawer -->
+      <div class="search-drawer" id="searchDrawer">
+        <div class="form-row">
+          <input type="text" id="searchInput" class="input-text input-sm" placeholder="搜尋內容..." style="flex:1;">
+          <input type="text" id="replaceInput" class="input-text input-sm" placeholder="取代為..." style="flex:1;">
+          <select id="searchColSelect" class="select-box input-sm">
+            <option value="all">全部欄位</option>
+          </select>
+        </div>
+        <div class="form-row" style="justify-content:space-between;">
+          <label class="checkbox-row" style="margin:0;font-size:12px;">
+            <input type="checkbox" id="searchCaseSensitive"> 區分大小寫
+          </label>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <span id="searchMatchCount" style="font-size:12px;color:var(--text-muted);"></span>
+            <button type="button" class="btn-secondary btn-sm" id="btnFindMatches">尋找</button>
+            <button type="button" class="btn-secondary btn-sm" id="btnReplaceOne">單筆取代</button>
+            <button type="button" class="btn-primary btn-sm" id="btnReplaceAll">全部取代</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Semantics & Dimension Bar -->
+      <div class="form-row" style="justify-content:space-between;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <label class="field-label" for="headerModeSelect">標題列模式：</label>
+          <select id="headerModeSelect" class="select-box input-sm">
+            <option value="firstRow">第一列作為標題 (thead)</option>
+            <option value="none">不使用標題列</option>
+          </select>
+          <label class="checkbox-row" style="margin:0;font-size:12px;">
+            <input type="checkbox" id="chkRowHeaderScope"> 第一欄設為列標題 (scope="row")
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span style="font-size:12px;color:var(--text-muted);">快速建立：</span>
+          <input type="number" id="quickRowsInput" class="input-text input-sm" value="5" min="1" max="500" style="width:54px;" aria-label="建立列數"> 列 ×
+          <input type="number" id="quickColsInput" class="input-text input-sm" value="4" min="1" max="30" style="width:50px;" aria-label="建立欄數"> 欄
+          <button type="button" class="btn-secondary btn-sm" id="btnQuickResize">建立空白表</button>
+        </div>
+      </div>
+
+      <!-- Interactive Spreadsheet Grid -->
+      <div class="grid-container" id="gridContainer">
+        <table class="editor-grid" id="editorGrid" aria-label="資料編輯表格">
+          <thead id="editorGridHead"></thead>
+          <tbody id="editorGridBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Pagination / Virtual Window Controls for Large Datasets -->
+      <div class="grid-footer-bar">
+        <div id="gridDimensionInfo">共 4 列 × 4 欄</div>
+        <div id="gridPaginationWrap" style="display:none;align-items:center;gap:6px;">
+          <span>大型表格分段顯示：</span>
+          <button type="button" class="btn-secondary btn-sm" id="btnGridPrevPage">上一頁</button>
+          <span id="gridPageInfo">1 / 1</span>
+          <button type="button" class="btn-secondary btn-sm" id="btnGridNextPage">下一頁</button>
+        </div>
+      </div>
+
+      <!-- Active Column Type & Format Inspector -->
+      <div class="col-inspector" id="colInspector">
+        <div class="col-inspector-title">
+          <span id="colInspectorHeading">欄位格式設定：第 1 欄</span>
+          <div style="display:flex;gap:4px;">
+            <button type="button" class="btn-secondary btn-sm" id="btnSortAsc" title="將此欄由小到大 / A-Z 排序">↑ 升冪排序</button>
+            <button type="button" class="btn-secondary btn-sm" id="btnSortDesc" title="將此欄由大到小 / Z-A 排序">↓ 降冪排序</button>
+          </div>
+        </div>
+        <div class="inspector-grid">
+          <div class="field-group">
+            <label class="field-label" for="colTypeSelect">資料類型</label>
+            <select id="colTypeSelect" class="select-box input-sm">
+              <option value="text">一般文字 (保留前導零)</option>
+              <option value="number">數字 (千分位/小數)</option>
+              <option value="currency">金額 (NT$ / $ / ¥)</option>
+              <option value="percent">百分比 (%)</option>
+              <option value="date">日期格式</option>
+              <option value="url">網址連結 (安全過濾)</option>
+              <option value="email">電子郵件 (mailto)</option>
+              <option value="status">勾選與狀態標籤</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="colAlignSelect">文字對齊</label>
+            <select id="colAlignSelect" class="select-box input-sm">
+              <option value="auto">自動 (依型別)</option>
+              <option value="left">靠左對齊</option>
+              <option value="center">置中對齊</option>
+              <option value="right">靠右對齊</option>
+            </select>
+          </div>
+          <div class="field-group" id="colCurrencyWrap" style="display:none;">
+            <label class="field-label" for="colCurrencySymbol">幣別符號</label>
+            <select id="colCurrencySymbol" class="select-box input-sm">
+              <option value="NT$">NT$ (新台幣)</option>
+              <option value="$">$ (美元)</option>
+              <option value="€">€ (歐元)</option>
+              <option value="¥">¥ (日圓/人民幣)</option>
+              <option value="">不顯示幣別</option>
+            </select>
+          </div>
+          <div class="field-group" id="colDecimalsWrap" style="display:none;">
+            <label class="field-label" for="colDecimalsSelect">小數位數</label>
+            <select id="colDecimalsSelect" class="select-box input-sm">
+              <option value="0">0 位 (整數)</option>
+              <option value="1">1 位</option>
+              <option value="2">2 位</option>
+            </select>
+          </div>
+          <div class="field-group" id="colDateWrap" style="display:none;">
+            <label class="field-label" for="colDateFormatSelect">日期格式</label>
+            <select id="colDateFormatSelect" class="select-box input-sm">
+              <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+              <option value="YYYY/MM/DD">YYYY/MM/DD</option>
+              <option value="TW">YYYY年MM月DD日</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="colRwdPrioritySelect">手機重點模式角色</label>
+            <select id="colRwdPrioritySelect" class="select-box input-sm">
+              <option value="primary">手機主要顯示</option>
+              <option value="secondary">手機收合 (點擊展開)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="colSpecialRoleSelect">欄位特殊強調</label>
+            <select id="colSpecialRoleSelect" class="select-box input-sm">
+              <option value="none">無特殊強調</option>
+              <option value="featured">推薦方案欄 (徽章強調)</option>
+              <option value="price">價格強調欄 (大字級主色)</option>
+              <option value="highlight">背景淺色強調欄</option>
+            </select>
+          </div>
+          <div class="field-group" id="colBadgeTextWrap" style="display:none;">
+            <label class="field-label" for="colBadgeTextInput">推薦標示文字</label>
+            <input type="text" id="colBadgeTextInput" class="input-text input-sm" value="推薦方案" placeholder="例如：最受歡迎">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENTER PANEL: Live Preview & Code Output -->
+  <section class="panel panel-preview" aria-label="即時預覽與程式碼輸出區">
+    <div class="panel-header preview-toolbar">
+      <h2 class="panel-title">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        即時預覽
+      </h2>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <div class="viewport-switcher" role="group" aria-label="預覽螢幕寬度切換">
+          <button type="button" class="active" data-vp="100%">桌面 100%</button>
+          <button type="button" data-vp="768px">平板 768px</button>
+          <button type="button" data-vp="390px">手機 390px</button>
+          <button type="button" data-vp="360px">小手機 360px</button>
+        </div>
+        <input type="number" id="customViewportInput" class="input-text input-sm" placeholder="自訂 px" min="280" max="1920" style="width:76px;" aria-label="自訂預覽像素寬度">
+        <button type="button" class="btn-secondary btn-sm" id="btnPrintTable" title="列印或另存 PDF">
+          <svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>列印
+        </button>
+      </div>
+    </div>
+
+    <!-- Isolated Preview Stage -->
+    <div class="preview-stage-outer" id="previewStageOuter">
+      <div class="preview-viewport" id="previewViewport">
+        <style id="previewScopedStyle"></style>
+        <div id="previewTableMount"></div>
+      </div>
+    </div>
+
+    <!-- Code Generator & Export Card -->
+    <div class="panel-body export-panel-card" id="exportCardSection">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+        <h3 style="margin:0;font-size:14px;font-weight:600;">HTML / CSS 程式碼產生器與檔案匯出</h3>
+        <span id="namespaceBadge" style="font-family:monospace;font-size:12px;background:#F3F4F6;padding:2px 8px;border-radius:4px;color:var(--text-sub);">.wmt-tc-init</span>
+      </div>
+
+      <div class="export-tabs" role="tablist">
+        <button type="button" class="export-tab-btn active" data-export-mode="wp">1. WordPress Gutenberg 相容版</button>
+        <button type="button" class="export-tab-btn" data-export-mode="inline">2. 純 HTML + 行內樣式</button>
+        <button type="button" class="export-tab-btn" data-export-mode="standalone">3. 獨立 HTML 網頁版</button>
+        <button type="button" class="export-tab-btn" data-export-mode="interactive">4. 進階互動版 (搜尋/排序/分頁)</button>
+      </div>
+
+      <div id="exportModeNotice" class="notice-box notice-info">
+        <strong>WordPress Gutenberg 最佳化模式：</strong>預設包含語意化 <code>&lt;table&gt;</code> 與獨立命名空間 CSS，不依賴任何 JavaScript 或外部 CDN，可直接貼入「自訂 HTML」區塊。
+      </div>
+
+      <!-- Interactive Mode Options -->
+      <div id="interactiveOptionsBar" class="form-row" style="display:none;background:#F9FAFB;padding:8px 10px;border-radius:6px;border:1px solid var(--border);margin-bottom:10px;">
+        <label class="checkbox-row" style="margin:0;"><input type="checkbox" id="chkInterSearch" checked> 前台關鍵字搜尋</label>
+        <label class="checkbox-row" style="margin:0;"><input type="checkbox" id="chkInterSort" checked> 前台點擊標題排序</label>
+        <label class="checkbox-row" style="margin:0;"><input type="checkbox" id="chkInterPage" checked> 前台分頁切換</label>
+        <label style="font-size:12px;margin-left:auto;">每頁筆數：
+          <select id="interPageSizeSelect" class="select-box input-sm">
+            <option value="5">5 筆</option>
+            <option value="10" selected>10 筆</option>
+            <option value="25">25 筆</option>
+            <option value="50">50 筆</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="form-row" style="margin-bottom:8px;">
+        <button type="button" class="btn-primary btn-sm" id="btnCopyCombined">
+          <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>一鍵複製完整程式碼
+        </button>
+        <button type="button" class="btn-secondary btn-sm" id="btnCopyHtmlOnly">僅複製 HTML</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnCopyCssOnly">僅複製 CSS</button>
+        <button type="button" class="btn-secondary btn-sm" id="btnSelectAllCode">全選程式碼 (手動複製)</button>
+      </div>
+
+      <div class="code-box-wrap">
+        <textarea id="generatedCodeOutput" class="code-textarea" readonly aria-label="產生的表格程式碼"></textarea>
+      </div>
+
+      <div class="form-row" style="justify-content:space-between;border-top:1px solid var(--border);padding-top:10px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button type="button" class="btn-secondary btn-sm" id="btnDownloadHtml">下載 .html 網頁檔</button>
+          <button type="button" class="btn-secondary btn-sm" id="btnDownloadCsv">下載 .csv (UTF-8 BOM)</button>
+          <button type="button" class="btn-secondary btn-sm" id="btnExportJson">匯出專案 .json 備份</button>
+          <button type="button" class="btn-secondary btn-sm" id="btnImportJsonTrigger">匯入 .json 備份</button>
+          <input type="file" id="jsonFileInput" accept=".json" style="display:none;">
+        </div>
+        <label class="checkbox-row" style="margin:0;font-size:12px;" title="開啟後，若儲存格以 =, +, -, @ 開頭，匯出 CSV 時會自動加上單引號防止 Excel 公式執行">
+          <input type="checkbox" id="chkCsvFormulaSafe" checked> CSV 公式安全防護
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT PANEL: Visual Style & RWD Editor -->
+  <aside class="panel panel-style" aria-label="表格樣式與 RWD 設定區">
+    <div class="settings-tabs" role="tablist">
+      <button type="button" class="active" data-style-tab="theme">範本與色彩</button>
+      <button type="button" data-style-tab="rwd">手機版 RWD</button>
+      <button type="button" data-style-tab="typo">字體與尺寸</button>
+      <button type="button" data-style-tab="meta">標題與進階</button>
+    </div>
+
+    <!-- Tab 1: Presets & Colors -->
+    <div class="settings-section active" id="styleTab-theme">
+      <div class="setting-group">
+        <h3 class="setting-group-title">六大視覺範本</h3>
+        <div class="preset-grid" id="presetGrid">
+          <button type="button" class="preset-card active" data-preset="minimal">
+            <div class="preset-swatch">
+              <span class="swatch-dot" style="background:#F9FAFB"></span>
+              <span class="swatch-dot" style="background:#111827"></span>
+              <span class="swatch-dot" style="background:#E5E7EB"></span>
+            </div>
+            <strong>極簡白色</strong>
+            <span style="font-size:11px;color:var(--text-muted)">乾淨俐落、細邊框</span>
+          </button>
+          <button type="button" class="preset-card" data-preset="business">
+            <div class="preset-swatch">
+              <span class="swatch-dot" style="background:#1E3A8A"></span>
+              <span class="swatch-dot" style="background:#EFF6FF"></span>
+              <span class="swatch-dot" style="background:#BFDBFE"></span>
+            </div>
+            <strong>專業商務</strong>
+            <span style="font-size:11px;color:var(--text-muted)">深藍表頭、清晰格線</span>
+          </button>
+          <button type="button" class="preset-card" data-preset="dark">
+            <div class="preset-swatch">
+              <span class="swatch-dot" style="background:#0F172A"></span>
+              <span class="swatch-dot" style="background:#1E293B"></span>
+              <span class="swatch-dot" style="background:#38BDF8"></span>
+            </div>
+            <strong>科技深色</strong>
+            <span style="font-size:11px;color:var(--text-muted)">高對比深色工作站風</span>
+          </button>
+          <button type="button" class="preset-card" data-preset="pricing">
+            <div class="preset-swatch">
+              <span class="swatch-dot" style="background:#065F46"></span>
+              <span class="swatch-dot" style="background:#ECFDF5"></span>
+              <span class="swatch-dot" style="background:#10B981"></span>
+            </div>
+            <strong>服務價目表</strong>
+            <span style="font-size:11px;color:var(--text-muted)">突顯服務項目與報價</span>
+          </button>
+          <button type="button" class="preset-card" data-preset="comparison">
+            <div class="preset-swatch">
+              <span class="swatch-dot" style="background:#312E81"></span>
+              <span class="swatch-dot" style="background:#EEF2FF"></span>
+              <span class="swatch-dot" style="background:#4F46E5"></span>
+            </div>
+            <strong>方案比較表</strong>
+            <span style="font-size:11px;color:var(--text-muted)">第一欄固定強化對照</span>
+          </button>
+          <button type="button" class="preset-card" data-preset="education">
+            <div class="preset-swatch">
+              <span class="swatch-dot" style="background:#9A3412"></span>
+              <span class="swatch-dot" style="background:#FFF7ED"></span>
+              <span class="swatch-dot" style="background:#FDBA74"></span>
+            </div>
+            <strong>教育課程表</strong>
+            <span style="font-size:11px;color:var(--text-muted)">溫潤色調、時段清楚</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3 class="setting-group-title">自訂色彩設定</h3>
+        <div class="color-picker-row">
+          <label class="field-label">標題列背景</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorHeaderBg" value="#1E3A8A">
+            <input type="text" id="hexHeaderBg" class="input-text input-sm" value="#1E3A8A">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">標題文字顏色</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorHeaderText" value="#FFFFFF">
+            <input type="text" id="hexHeaderText" class="input-text input-sm" value="#FFFFFF">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">表格內容背景</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorBodyBg" value="#FFFFFF">
+            <input type="text" id="hexBodyBg" class="input-text input-sm" value="#FFFFFF">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">內容文字顏色</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorBodyText" value="#111827">
+            <input type="text" id="hexBodyText" class="input-text input-sm" value="#111827">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">交錯列 (斑馬紋) 背景</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorStripeBg" value="#F8FAFC">
+            <input type="text" id="hexStripeBg" class="input-text input-sm" value="#F8FAFC">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">滑鼠懸停 (Hover) 背景</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorHoverBg" value="#EFF6FF">
+            <input type="text" id="hexHoverBg" class="input-text input-sm" value="#EFF6FF">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">邊框顏色</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorBorder" value="#E5E7EB">
+            <input type="text" id="hexBorder" class="input-text input-sm" value="#E5E7EB">
+          </div>
+        </div>
+        <div class="color-picker-row">
+          <label class="field-label">推薦/強調主色</label>
+          <div class="color-input-pair">
+            <input type="color" id="colorAccent" value="#2563EB">
+            <input type="text" id="hexAccent" class="input-text input-sm" value="#2563EB">
+          </div>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3 class="setting-group-title">行列視覺效果</h3>
+        <label class="checkbox-row"><input type="checkbox" id="chkZebraStripe" checked> 啟用交錯列背景色 (斑馬紋)</label>
+        <label class="checkbox-row"><input type="checkbox" id="chkHoverRow" checked> 啟用滑鼠移過列高亮</label>
+        <label class="checkbox-row"><input type="checkbox" id="chkShowVerticalBorder"> 顯示垂直分隔邊框</label>
+        <label class="checkbox-row"><input type="checkbox" id="chkFirstColBold"> 第一欄文字加粗強調</label>
+      </div>
+    </div>
+
+    <!-- Tab 2: Mobile RWD Modes -->
+    <div class="settings-section" id="styleTab-rwd">
+      <div class="setting-group">
+        <h3 class="setting-group-title">手機版 RWD 呈現模式</h3>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:0;">請配合中央預覽區的「手機 390px」按鈕即時檢視切換效果。</p>
+
+        <label class="preset-card" style="margin-bottom:8px;cursor:pointer;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <input type="radio" name="rwdModeRadio" value="scroll" checked>
+            <strong>模式一：水平滑動表格 (推薦預設)</strong>
+          </div>
+          <span style="font-size:12px;color:var(--text-sub);">保留完整傳統表格結構，於容器內部平滑橫向捲動，不撐破網頁版面、不裁切文字。</span>
+        </label>
+
+        <label class="preset-card" style="margin-bottom:8px;cursor:pointer;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <input type="radio" name="rwdModeRadio" value="stack">
+            <strong>模式二：手機獨立卡片式</strong>
+          </div>
+          <span style="font-size:12px;color:var(--text-sub);">小螢幕下每列轉為獨立卡片，自動帶入「欄位名稱：內容」對照，並保留輔助技術閱讀語意。</span>
+        </label>
+
+        <label class="preset-card" style="margin-bottom:8px;cursor:pointer;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <input type="radio" name="rwdModeRadio" value="priority">
+            <strong>模式三：重點欄位顯示 + 展開明細</strong>
+          </div>
+          <span style="font-size:12px;color:var(--text-sub);">手機優先顯示主要欄位，次要欄位自動整理至每列下方的「展開更多資訊」區塊，零資訊遺失。</span>
+        </label>
+      </div>
+
+      <div class="setting-group">
+        <h3 class="setting-group-title">RWD 斷點與捲動參數</h3>
+        <div class="field-group" style="margin-bottom:10px;">
+          <label class="field-label" for="rwdBreakpointInput">手機版切換斷點 (px)</label>
+          <input type="number" id="rwdBreakpointInput" class="input-text input-sm" value="640" min="360" max="1024">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="rwdMinWidthInput">水平滑動模式最小表格寬度 (px)</label>
+          <input type="number" id="rwdMinWidthInput" class="input-text input-sm" value="560" min="320" max="1600">
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Typography & Sizing -->
+    <div class="settings-section" id="styleTab-typo">
+      <div class="setting-group">
+        <h3 class="setting-group-title">字體與排版</h3>
+        <div class="field-group" style="margin-bottom:10px;">
+          <label class="field-label" for="fontFamilySelect">字體系列 (不強迫載入外部字型)</label>
+          <select id="fontFamilySelect" class="select-box input-sm">
+            <option value="sans">系統無襯線 (PingFang / Microsoft JhengHei)</option>
+            <option value="noto">Noto Sans TC 優先 + 系統無襯線</option>
+            <option value="arial">Arial / Helvetica 商務風</option>
+            <option value="serif">系統襯線體 (公文/學術報告風)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="field-group" style="flex:1;">
+            <label class="field-label" for="fontSizeInput">內容字級 (px)</label>
+            <input type="number" id="fontSizeInput" class="input-text input-sm" value="15" min="12" max="24">
+          </div>
+          <div class="field-group" style="flex:1;">
+            <label class="field-label" for="lineHeightSelect">行高</label>
+            <select id="lineHeightSelect" class="select-box input-sm">
+              <option value="1.4">緊湊 1.4</option>
+              <option value="1.6" selected>適中 1.6</option>
+              <option value="1.8">寬鬆 1.8</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-group" style="margin-top:10px;">
+          <label class="field-label" for="textWrapSelect">文字換行處理</label>
+          <select id="textWrapSelect" class="select-box input-sm">
+            <option value="wrap">自動換行 (完整顯示內容)</option>
+            <option value="nowrap">單行不換行 (搭配水平捲動)</option>
+            <option value="ellipsis">單行省略號 (滑鼠懸停顯示完整 title)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3 class="setting-group-title">表格尺寸與間距</h3>
+        <div class="form-row">
+          <div class="field-group" style="flex:1;">
+            <label class="field-label" for="tableWidthSelect">表格寬度模式</label>
+            <select id="tableWidthSelect" class="select-box input-sm">
+              <option value="100%">100% 填滿容器</option>
+              <option value="auto">自動依內容寬度</option>
+            </select>
+          </div>
+          <div class="field-group" style="flex:1;">
+            <label class="field-label" for="cellPaddingSelect">儲存格內距</label>
+            <select id="cellPaddingSelect" class="select-box input-sm">
+              <option value="8px 10px">緊湊 (8×10px)</option>
+              <option value="12px 16px" selected>標準 (12×16px)</option>
+              <option value="16px 20px">寬敞 (16×20px)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row" style="margin-top:10px;">
+          <div class="field-group" style="flex:1;">
+            <label class="field-label" for="borderWidthInput">邊框粗細 (px)</label>
+            <input type="number" id="borderWidthInput" class="input-text input-sm" value="1" min="0" max="4">
+          </div>
+          <div class="field-group" style="flex:1;">
+            <label class="field-label" for="borderRadiusInput">外框圓角 (px)</label>
+            <input type="number" id="borderRadiusInput" class="input-text input-sm" value="8" min="0" max="20">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Metadata, Empty Value & Storage -->
+    <div class="settings-section" id="styleTab-meta">
+      <div class="setting-group">
+        <h3 class="setting-group-title">表格標題與無障礙語意</h3>
+        <div class="field-group" style="margin-bottom:8px;">
+          <label class="field-label" for="tableCaptionInput">表格名稱 (輸出至 &lt;caption&gt;)</label>
+          <input type="text" id="tableCaptionInput" class="input-text input-sm" placeholder="例如：網站設計方案與費用比較表">
+        </div>
+        <div class="field-group" style="margin-bottom:8px;">
+          <label class="field-label" for="tableSummaryInput">表格副標題 / 簡介</label>
+          <input type="text" id="tableSummaryInput" class="input-text input-sm" placeholder="顯示於標題下方的簡短說明">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="tableFootnoteInput">表格下方註解 (支援多行費用說明/更新日期)</label>
+          <textarea id="tableFootnoteInput" class="input-text input-sm" rows="3" placeholder="例如：* 以上報價皆為未稅金額，最後更新日期：2026/11"></textarea>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3 class="setting-group-title">空值與狀態顯示</h3>
+        <div class="field-group" style="margin-bottom:8px;">
+          <label class="field-label" for="emptyCellModeSelect">空白儲存格顯示方式</label>
+          <select id="emptyCellModeSelect" class="select-box input-sm">
+            <option value="blank">保持空白</option>
+            <option value="dash">顯示長破折號 (—)</option>
+            <option value="na">顯示「不適用」</option>
+            <option value="custom">自訂文字</option>
+          </select>
+        </div>
+        <div class="field-group" id="emptyCellCustomWrap" style="display:none;margin-bottom:8px;">
+          <input type="text" id="emptyCellCustomInput" class="input-text input-sm" value="無" placeholder="自訂空白格文字">
+        </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="chkStatusSvgIcon" checked> 狀態欄自動附加 SVG 圖示 (支援/有/已完成)
+        </label>
+      </div>
+
+      <div class="setting-group">
+        <h3 class="setting-group-title">本機儲存與隱私管理</h3>
+        <label class="checkbox-row">
+          <input type="checkbox" id="chkAutoSave" checked> 自動保存專案變更至瀏覽器本機
+        </label>
+        <p style="font-size:12px;color:var(--text-muted);margin:6px 0 10px 0;">
+          所有資料 100% 儲存在您的瀏覽器 LocalStorage，不會上傳至任何伺服器。若使用公用電腦，離開前請點擊下方清除按鈕。
+        </p>
+        <button type="button" class="btn-danger btn-sm" id="btnWipeAllStorage" style="width:100%;">清除瀏覽器中所有 TableCraft 資料</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<!-- Import Modal (Excel Paste / CSV / TSV) -->
+<div class="modal-backdrop" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="importModalTitle">匯入 Excel 複製內容 / CSV / TSV 檔案</h3>
+      <button type="button" class="btn-secondary btn-sm" id="btnCloseImportModal">關閉</button>
+    </div>
+    <div class="modal-body">
+      <div class="notice-box notice-info">
+        <strong>操作提示：</strong>您可以直接在 Excel 或 Google 試算表選取範圍並按 <code>Ctrl+C</code>，接著在下方文字框按 <code>Ctrl+V</code> 貼上；或選擇電腦中的 <code>.csv</code> / <code>.tsv</code> 檔案。若您有 <code>.xlsx</code> 活頁簿，請直接從 Excel 複製貼上或另存為 CSV UTF-8 格式。
+      </div>
+
+      <div class="form-row" style="justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <label class="btn-secondary btn-sm" style="cursor:pointer;">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            選擇 .csv / .tsv 檔案
+            <input type="file" id="csvFileInput" accept=".csv,.tsv,.txt" style="display:none;">
+          </label>
+          <button type="button" class="btn-secondary btn-sm" id="btnReadClipboard">從系統剪貼簿讀取</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <label class="field-label" for="importDelimiterSelect">分隔符號：</label>
+          <select id="importDelimiterSelect" class="select-box input-sm">
+            <option value="auto">自動偵測 (Excel Tab / CSV 逗號)</option>
+            <option value="tab">Tab 分隔 (Excel / TSV)</option>
+            <option value="comma">逗號分隔 (CSV)</option>
+          </select>
+        </div>
+      </div>
+
+      <textarea id="importRawTextarea" class="input-text" style="width:100%;height:150px;font-family:monospace;font-size:12.5px;" placeholder="在此貼上從 Excel 或 Google 試算表複製的表格內容...&#10;例如：&#10;方案	架設費用	主機年費	頁面數&#10;一頁式網站	18900	5800	1&#10;形象網站	35900	8800	6&#10;電商網站	46900	12800	8"></textarea>
+
+      <div id="importPreviewSection" style="margin-top:14px;display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <strong style="font-size:13px;">解析預覽 (<span id="importStatsText">0 列 × 0 欄</span>)</strong>
+          <span id="importWarningBadge" style="font-size:12px;color:var(--warning);"></span>
+        </div>
+        <div id="importPreviewTableWrap" style="max-height:180px;overflow:auto;border:1px solid var(--border);border-radius:6px;"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" id="btnAppendImport">新增至目前表格下方</button>
+      <button type="button" class="btn-primary" id="btnReplaceImport">取代目前表格</button>
+    </div>
+  </div>
+</div>
+
+<!-- SEO & Documentation Content -->
+<section class="seo-doc-section" aria-label="工具說明與常見問題">
+  <div class="seo-card">
+    <h1>WUMETAX TableCraft｜免費線上 HTML 表格製作器與 WordPress RWD 表格轉換工作站</h1>
+    <p style="color:var(--text-sub);margin:0;">
+      WUMETAX TableCraft 是專為內容創作者、網站管理員、行銷人員與前端開發者設計的線上表格製作工具。無需撰寫任何 HTML 或 CSS，即可將 Excel 試算表與 CSV 資料轉換為具備完整無障礙語意（<code>thead</code>、<code>tbody</code>、<code>scope</code>）、獨立 CSS 命名空間，且完美支援手機版 RWD 響應式顯示的網頁表格程式碼。
+    </p>
+
+    <div class="seo-grid">
+      <div>
+        <h2>如何將 Excel 轉成 HTML 表格？</h2>
+        <ol style="padding-left:18px;color:var(--text-sub);margin:0;">
+          <li>在 Excel 或 Google 試算表選取您的資料範圍並複製（<code>Ctrl+C</code>）。</li>
+          <li>點擊上方工具列的「匯入 Excel / CSV」，將資料貼入文字框並確認解析預覽。</li>
+          <li>在左側工作區設定金額（NT$）、百分比、網址或推薦方案強調欄位。</li>
+          <li>於右側面板選擇喜歡的視覺範本與手機版 RWD 模式，即可一鍵複製 HTML/CSS。</li>
+        </ol>
+      </div>
+      <div>
+        <h2>如何貼進 WordPress Gutenberg 編輯器？</h2>
+        <ol style="padding-left:18px;color:var(--text-sub);margin:0;">
+          <li>在中央下方的程式碼產生器選擇「1. WordPress Gutenberg 相容版」。</li>
+          <li>點擊「一鍵複製完整程式碼」。</li>
+          <li>前往 WordPress 文章或頁面編輯器，新增一個「自訂 HTML（Custom HTML）」區塊並貼上。</li>
+          <li>若您的網站安全性設定會過濾 <code>&lt;style&gt;</code> 標籤，可改用「純 HTML + 行內樣式」模式，或將 CSS 貼至外觀自訂的「額外 CSS」中。</li>
+        </ol>
+      </div>
+      <div>
+        <h2>三種手機版 RWD 表格呈現模式</h2>
+        <ul style="padding-left:18px;color:var(--text-sub);margin:0;">
+          <li><strong>水平滑動表格：</strong>保持桌面版完整對照結構，僅在表格容器內提供平滑觸控橫向捲動，絕不造成整頁破版。</li>
+          <li><strong>手機獨立卡片式：</strong>在手機螢幕自動將每一列轉為直向資訊卡片，自動標註欄位名稱，適合規格表與聯絡名冊。</li>
+          <li><strong>重點欄位展開模式：</strong>小螢幕先顯示核心欄位，次要欄位自動收納於點擊展開面板中，兼顧畫面簡潔與資料完整性。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>常見問題 FAQ 與隱私安全聲明</h2>
+    <div class="seo-grid">
+      <div class="faq-item">
+        <div class="faq-q">Q1：我匯入的公司報價或客戶資料會被上傳到伺服器嗎？</div>
+        <p class="faq-a">絕對不會。WUMETAX TableCraft 採用 100% 瀏覽器本機運算（Client-side Processing），所有 CSV 解析、編輯與儲存皆在您的裝置記憶體與本機 LocalStorage 中完成，不傳送任何資料至外部 API 或雲端伺服器。</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q2：產生的表格 CSS 會影響我原本網站佈景主題的樣式嗎？</div>
+        <p class="faq-a">不會。每張表格都會自動綁定專屬的命名空間識別碼（例如 <code>.wmt-tc-a1b2c3</code>），絕不使用全域 <code>table {}</code> 或 <code>td {}</code> 選擇器，同一頁面放置多張不同風格的 TableCraft 表格也不會互相干擾。</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q3：這項工具需要付費、註冊會員或安裝 WordPress 外掛嗎？</div>
+        <p class="faq-a">完全免費、無使用次數限制、無需註冊登入，產生的表格程式碼乾淨獨立，不需要在 WordPress 安裝任何笨重的表格外掛，也不會強制加入任何浮水印或廣告連結。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div>
+    © 2026 WUMETAX｜由 <a href="https://wumetax.com/" target="_blank" rel="noopener noreferrer">wumetax.com</a> 製作 ｜
+    <a href="https://wumetax.com/" target="_blank" rel="noopener noreferrer">官方網站</a> ｜
+    <a href="https://wumetax.com/lab/" target="_blank" rel="noopener noreferrer">更多 WUMETAX Lab 免費工具</a>
+  </div>
+</footer>
+
+<!-- Toast Notification Mount -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* =========================================================
+   * 1. CONSTANTS, PRESETS & DEFAULT STATE
+   * ========================================================= */
+  const STORAGE_KEY = 'wumetax_tablecraft_v1_store';
+
+  const STYLE_PRESETS = {
+    minimal: {
+      name: '極簡白色',
+      headerBg: '#F9FAFB', headerText: '#111827',
+      bodyBg: '#FFFFFF', bodyText: '#1F2937',
+      stripeBg: '#F9FAFB', hoverBg: '#F3F4F6',
+      borderColor: '#E5E7EB', accentColor: '#2563EB',
+      zebra: false, hover: true, verticalBorder: false, firstColBold: true,
+      borderWidth: 1, borderRadius: 8
+    },
+    business: {
+      name: '專業商務',
+      headerBg: '#1E3A8A', headerText: '#FFFFFF',
+      bodyBg: '#FFFFFF', bodyText: '#111827',
+      stripeBg: '#F8FAFC', hoverBg: '#EFF6FF',
+      borderColor: '#CBD5E1', accentColor: '#2563EB',
+      zebra: true, hover: true, verticalBorder: true, firstColBold: true,
+      borderWidth: 1, borderRadius: 8
+    },
+    dark: {
+      name: '科技深色',
+      headerBg: '#0F172A', headerText: '#F8FAFC',
+      bodyBg: '#1E293B', bodyText: '#E2E8F0',
+      stripeBg: '#172033', hoverBg: '#334155',
+      borderColor: '#334155', accentColor: '#38BDF8',
+      zebra: true, hover: true, verticalBorder: false, firstColBold: true,
+      borderWidth: 1, borderRadius: 10
+    },
+    pricing: {
+      name: '服務價目表',
+      headerBg: '#065F46', headerText: '#FFFFFF',
+      bodyBg: '#FFFFFF', bodyText: '#111827',
+      stripeBg: '#ECFDF5', hoverBg: '#D1FAE5',
+      borderColor: '#A7F3D0', accentColor: '#059669',
+      zebra: true, hover: true, verticalBorder: false, firstColBold: true,
+      borderWidth: 1, borderRadius: 10
+    },
+    comparison: {
+      name: '方案比較表',
+      headerBg: '#312E81', headerText: '#FFFFFF',
+      bodyBg: '#FFFFFF', bodyText: '#1F2937',
+      stripeBg: '#F5F3FF', hoverBg: '#EEF2FF',
+      borderColor: '#DDD6FE', accentColor: '#4F46E5',
+      zebra: true, hover: true, verticalBorder: true, firstColBold: true,
+      borderWidth: 1, borderRadius: 8
+    },
+    education: {
+      name: '教育課程表',
+      headerBg: '#9A3412', headerText: '#FFFFFF',
+      bodyBg: '#FFFFFF', bodyText: '#1F2937',
+      stripeBg: '#FFF7ED', hoverBg: '#FFEDD5',
+      borderColor: '#FED7AA', accentColor: '#EA580C',
+      zebra: true, hover: true, verticalBorder: true, firstColBold: true,
+      borderWidth: 1, borderRadius: 8
+    }
+  };
+
+  function generateStableId(prefix) {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let out = '';
+    for (let i = 0; i < 6; i++) {
+      out += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return (prefix || 'tc') + '-' + out;
+  }
+
+  function createDefaultColumnMeta(index, Partial) {
+    return Object.assign({
+      id: 'col_' + index + '_' + Date.now().toString(36),
+      type: 'text',        // text | number | currency | percent | date | url | email | status
+      align: 'auto',       // auto | left | center | right
+      currency: 'NT$',
+      decimals: 0,
+      dateFormat: 'YYYY-MM-DD',
+      rwdPriority: 'primary', // primary | secondary
+      specialRole: 'none',    // none | featured | price | highlight
+      badgeText: '推薦方案'
+    }, Partial || {});
+  }
+
+  function createDemoProject() {
+    const rows = [
+      ['方案', '架設費用', '主機年費', '頁面數', 'RWD 手機版', 'SEO 基礎架構', '適用對象'],
+      ['一頁式網站', '18900', '5800', '1', '支援', '有', '活動推廣、單一產品銷售'],
+      ['形象網站', '35900', '8800', '6', '支援', '有', '品牌官網、中小企業介紹'],
+      ['電商網站', '46900', '12800', '8', '支援', '有', '線上購物、金流物流串接']
+    ];
+    const cols = [
+      createDefaultColumnMeta(0, { type: 'text', align: 'left' }),
+      createDefaultColumnMeta(1, { type: 'currency', currency: 'NT$', decimals: 0, specialRole: 'price' }),
+      createDefaultColumnMeta(2, { type: 'currency', currency: 'NT$', decimals: 0 }),
+      createDefaultColumnMeta(3, { type: 'number', decimals: 0, align: 'center' }),
+      createDefaultColumnMeta(4, { type: 'status', align: 'center' }),
+      createDefaultColumnMeta(5, { type: 'status', align: 'center', rwdPriority: 'secondary' }),
+      createDefaultColumnMeta(6, { type: 'text', rwdPriority: 'secondary' })
+    ];
+    return {
+      id: 'proj_' + Date.now().toString(36),
+      tableUid: generateStableId('wmt-tc'),
+      name: 'WordPress 網站收費比較表',
+      headerMode: 'firstRow',
+      rowHeaderScope: true,
+      rows: rows,
+      columns: cols,
+      style: Object.assign({}, STYLE_PRESETS.business, {
+        preset: 'business',
+        fontFamily: 'sans',
+        fontSize: 15,
+        lineHeight: '1.6',
+        textWrap: 'wrap',
+        tableWidth: '100%',
+        cellPadding: '12px 16px',
+        rwdMode: 'scroll',
+        rwdBreakpoint: 640,
+        rwdMinWidth: 580,
+        caption: 'WordPress 網站設計方案與收費比較表',
+        summary: '提供一頁式、品牌形象與完整電商網站方案規格對照',
+        footnote: '* 以上報價皆為未稅新台幣金額，首年贈送 SSL 憑證與每日異地備份服務。',
+        emptyCellMode: 'dash',
+        emptyCellCustom: '無',
+        statusSvgIcon: true
+      }),
+      exportConfig: {
+        mode: 'wp',
+        csvFormulaSafe: true,
+        interSearch: true,
+        interSort: true,
+        interPage: true,
+        interPageSize: 10
+      }
+    };
+  }
+
+  /* =========================================================
+   * 2. APPLICATION STATE & HISTORY
+   * ========================================================= */
+  const App = {
+    projects: [],
+    activeProjectId: null,
+    autoSave: true,
+    activeRowIdx: 1,
+    activeColIdx: 0,
+    gridPage: 0,
+    gridPageSize: 100, // Virtual pagination threshold for huge tables
+    history: [],
+    historyIndex: -1,
+    parsedImportRows: []
+  };
+
+  function getActiveProject() {
+    return App.projects.find(p => p.id === App.activeProjectId) || App.projects[0];
+  }
+
+  function cloneDeep(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+  function pushHistory() {
+    const proj = getActiveProject();
+    if (!proj) return;
+    const snapshot = JSON.stringify({
+      rows: proj.rows,
+      columns: proj.columns,
+      headerMode: proj.headerMode,
+      rowHeaderScope: proj.rowHeaderScope,
+      style: proj.style
+    });
+    if (App.historyIndex >= 0 && App.history[App.historyIndex] === snapshot) return;
+    App.history = App.history.slice(0, App.historyIndex + 1);
+    App.history.push(snapshot);
+    if (App.history.length > 40) App.history.shift();
+    App.historyIndex = App.history.length - 1;
+    updateUndoRedoButtons();
+  }
+
+  function restoreSnapshot(snapshotStr) {
+    const proj = getActiveProject();
+    if (!proj || !snapshotStr) return;
+    const data = JSON.parse(snapshotStr);
+    proj.rows = data.rows;
+    proj.columns = data.columns;
+    proj.headerMode = data.headerMode;
+    proj.rowHeaderScope = data.rowHeaderScope;
+    proj.style = data.style;
+    syncAllUIFromProject();
+    renderAll();
+  }
+
+  function updateUndoRedoButtons() {
+    document.getElementById('btnUndo').disabled = App.historyIndex <= 0;
+    document.getElementById('btnRedo').disabled = App.historyIndex >= App.history.length - 1;
+  }
+
+  /* =========================================================
+   * 3. RFC 4180 STATE-MACHINE CSV / TSV / EXCEL PARSER
+   * ========================================================= */
+  function parseDelimitedText(rawText, delimiterMode) {
+    if (!rawText || typeof rawText !== 'string') return [];
+    // Strip UTF-8 BOM if present
+    let text = rawText.replace(/^\uFEFF/, '');
+    // Normalize CRLF and CR to LF
+    text = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+    // Auto-detect delimiter by inspecting first few lines outside quotes
+    let delimiter = '\t';
+    if (delimiterMode === 'comma') {
+      delimiter = ',';
+    } else if (delimiterMode === 'tab') {
+      delimiter = '\t';
+    } else {
+      let tabCount = 0, commaCount = 0, inQuotes = false;
+      const sampleLen = Math.min(text.length, 2000);
+      for (let i = 0; i < sampleLen; i++) {
+        const ch = text[i];
+        if (ch === '"') inQuotes = !inQuotes;
+        else if (!inQuotes) {
+          if (ch === '\t') tabCount++;
+          else if (ch === ',') commaCount++;
+        }
+      }
+      delimiter = (tabCount >= commaCount && tabCount > 0) ? '\t' : (commaCount > 0 ? ',' : '\t');
+    }
+
+    const rows = [];
+    let currentRow = [];
+    let currentCell = '';
+    let inQuotes = false;
+    let i = 0;
+    const len = text.length;
+
+    while (i < len) {
+      const ch = text[i];
+      if (inQuotes) {
+        if (ch === '"') {
+          if (i + 1 < len && text[i + 1] === '"') {
+            currentCell += '"';
+            i += 2;
+            continue;
+          } else {
+            inQuotes = false;
+            i++;
+            continue;
+          }
+        } else {
+          currentCell += ch;
+          i++;
+        }
+      } else {
+        if (ch === '"' && currentCell.length === 0) {
+          inQuotes = true;
+          i++;
+        } else if (ch === delimiter) {
+          currentRow.push(currentCell);
+          currentCell = '';
+          i++;
+        } else if (ch === '\n') {
+          currentRow.push(currentCell);
+          rows.push(currentRow);
+          currentRow = [];
+          currentCell = '';
+          i++;
+        } else {
+          currentCell += ch;
+          i++;
+        }
+      }
+    }
+    // Push remaining cell/row if non-empty
+    if (currentCell.length > 0 || currentRow.length > 0) {
+      currentRow.push(currentCell);
+      rows.push(currentRow);
+    }
+
+    // Remove trailing completely empty line caused by trailing newline
+    while (rows.length > 1) {
+      const last = rows[rows.length - 1];
+      if (last.length === 1 && last[0] === '') {
+        rows.pop();
+      } else {
+        break;
+      }
+    }
+
+    if (rows.length === 0) return [];
+
+    // Normalize column count across all rows
+    let maxCols = 0;
+    for (let r = 0; r < rows.length; r++) {
+      if (rows[r].length > maxCols) maxCols = rows[r].length;
+    }
+    for (let r = 0; r < rows.length; r++) {
+      while (rows[r].length < maxCols) {
+        rows[r].push('');
+      }
+    }
+    return rows;
+  }
+
+  /* =========================================================
+   * 4. SECURITY ESCAPING & CELL FORMATTING ENGINE
+   * ========================================================= */
+  function escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function sanitizeUrl(rawUrl) {
+    if (!rawUrl) return null;
+    const trimmed = String(rawUrl).trim();
+    if (!trimmed) return null;
+    try {
+      const parsed = new URL(trimmed, 'https://example.com');
+      if (/^(http:|https:|mailto:|tel:)$/i.test(parsed.protocol)) {
+        // Check if original string had a dangerous scheme
+        if (/^\s*(javascript|data|vbscript):/i.test(trimmed)) return null;
+        return trimmed;
+      }
+    } catch (e) {
+      return null;
+    }
+    return null;
+  }
+
+  function parseNumericValue(raw) {
+    if (raw === null || raw === undefined) return NaN;
+    const str = String(raw).trim();
+    if (!str) return NaN;
+    // Clean currency symbols and commas
+    const cleaned = str.replace(/^(NT\$|\$|€|¥|\s)+/i, '').replace(/,/g, '').replace(/%$/, '').trim();
+    if (!cleaned || !/^[-+]?\d*(\.\d+)?$/.test(cleaned)) return NaN;
+    return parseFloat(cleaned);
+  }
+
+  function formatCellForDisplay(rawVal, colMeta, styleConfig) {
+    const rawStr = (rawVal === null || rawVal === undefined) ? '' : String(rawVal);
+    const trimmed = rawStr.trim();
+
+    // Handle Empty Cell
+    if (trimmed === '') {
+      let emptyDisplay = '';
+      if (styleConfig.emptyCellMode === 'dash') emptyDisplay = '—';
+      else if (styleConfig.emptyCellMode === 'na') emptyDisplay = '不適用';
+      else if (styleConfig.emptyCellMode === 'custom') emptyDisplay = escapeHtml(styleConfig.emptyCellCustom || '');
+      return {
+        html: `<span class="tc-empty">${emptyDisplay}</span>`,
+        plainText: emptyDisplay
+      };
+    }
+
+    const type = (colMeta && colMeta.type) || 'text';
+
+    // 1. Currency
+    if (type === 'currency') {
+      const num = parseNumericValue(trimmed);
+      if (!isNaN(num)) {
+        const dec = parseInt(colMeta.decimals || 0, 10);
+        const formattedNum = num.toLocaleString('en-US', {
+          minimumFractionDigits: dec,
+          maximumFractionDigits: dec
+        });
+        const sym = colMeta.currency !== undefined ? colMeta.currency : 'NT$';
+        const out = escapeHtml(sym + formattedNum);
+        return { html: out, plainText: sym + formattedNum };
+      }
+    }
+
+    // 2. Number
+    if (type === 'number') {
+      const num = parseNumericValue(trimmed);
+      if (!isNaN(num)) {
+        const dec = parseInt(colMeta.decimals || 0, 10);
+        const formattedNum = num.toLocaleString('en-US', {
+          minimumFractionDigits: dec,
+          maximumFractionDigits: dec
+        });
+        return { html: escapeHtml(formattedNum), plainText: formattedNum };
+      }
+    }
+
+    // 3. Percent
+    if (type === 'percent') {
+      const num = parseNumericValue(trimmed);
+      if (!isNaN(num)) {
+        const dec = parseInt(colMeta.decimals || 0, 10);
+        const out = num.toFixed(dec) + '%';
+        return { html: escapeHtml(out), plainText: out };
+      }
+    }
+
+    // 4. Date (Safe conversion only when valid)
+    if (type === 'date') {
+      const m = trimmed.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/);
+      if (m) {
+        const y = m[1];
+        const mo = m[2].padStart(2, '0');
+        const da = m[3].padStart(2, '0');
+        let out = `${y}-${mo}-${da}`;
+        if (colMeta.dateFormat === 'YYYY/MM/DD') out = `${y}/${mo}/${da}`;
+        else if (colMeta.dateFormat === 'TW') out = `${y}年${mo}月${da}日`;
+        return { html: escapeHtml(out), plainText: out };
+      }
+    }
+
+    // 5. URL
+    if (type === 'url') {
+      const safe = sanitizeUrl(trimmed);
+      if (safe) {
+        const escapedHref = escapeHtml(safe);
+        const escapedLabel = escapeHtml(trimmed);
+        return {
+          html: `<a href="${escapedHref}" target="_blank" rel="noopener noreferrer">${escapedLabel}</a>`,
+          plainText: trimmed
+        };
+      }
+    }
+
+    // 6. Email
+    if (type === 'email') {
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+        const escapedMail = escapeHtml(trimmed);
+        return {
+          html: `<a href="mailto:${escapedMail}">${escapedMail}</a>`,
+          plainText: trimmed
+        };
+      }
+    }
+
+    // 7. Status Badge (Accessible SVG + Text, no Emoji)
+    if (type === 'status') {
+      const positiveList = ['有', '支援', '已完成', '是', '可', 'yes', 'true', 'ok', 'v'];
+      const negativeList = ['無', '不支援', '未完成', '否', '不可', 'no', 'false', 'x'];
+      const lower = trimmed.toLowerCase();
+      const useSvg = styleConfig.statusSvgIcon !== false;
+
+      if (positiveList.includes(lower)) {
+        const svg = useSvg ? `<svg class="tc-status-svg" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 4.5L6.5 11.5L2.5 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>` : '';
+        return {
+          html: `<span class="tc-badge tc-badge-pos">${svg}<span>${escapeHtml(trimmed)}</span></span>`,
+          plainText: trimmed
+        };
+      }
+      if (negativeList.includes(lower)) {
+        const svg = useSvg ? `<svg class="tc-status-svg" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>` : '';
+        return {
+          html: `<span class="tc-badge tc-badge-neg">${svg}<span>${escapeHtml(trimmed)}</span></span>`,
+          plainText: trimmed
+        };
+      }
+      return {
+        html: `<span class="tc-badge tc-badge-neutral"><span>${escapeHtml(trimmed)}</span></span>`,
+        plainText: trimmed
+      };
+    }
+
+    // Default Text (Preserve multiline breaks safely)
+    const escapedText = escapeHtml(rawStr).replace(/\n/g, '<br>');
+    return { html: escapedText, plainText: rawStr };
+  }
+
+  function resolveColumnAlignment(colMeta) {
+    if (!colMeta) return 'left';
+    if (colMeta.align && colMeta.align !== 'auto') return colMeta.align;
+    if (['number', 'currency', 'percent'].includes(colMeta.type)) return 'right';
+    if (['status', 'date'].includes(colMeta.type)) return 'center';
+    return 'left';
+  }
+
+  /* =========================================================
+   * 5. SCOPED CSS & SEMANTIC HTML TABLE GENERATOR
+   * ========================================================= */
+  function generateScopedCss(proj) {
+    const ns = '.' + proj.tableUid;
+    const s = proj.style;
+    const bp = parseInt(s.rwdBreakpoint, 10) || 640;
+    const minW = parseInt(s.rwdMinWidth, 10) || 560;
+
+    let fontStack = '-apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif';
+    if (s.fontFamily === 'noto') fontStack = '"Noto Sans TC", -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", sans-serif';
+    else if (s.fontFamily === 'arial') fontStack = 'Arial, Helvetica, "Microsoft JhengHei", sans-serif';
+    else if (s.fontFamily === 'serif') fontStack = 'Georgia, "PMingLiU", "Noto Serif TC", serif';
+
+    let wrapCss = 'white-space: normal; word-break: break-word;';
+    if (s.textWrap === 'nowrap') wrapCss = 'white-space: nowrap;';
+    else if (s.textWrap === 'ellipsis') wrapCss = 'white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px;';
+
+    const vBorder = s.verticalBorder ? `${s.borderWidth}px solid ${s.borderColor}` : 'none';
+    const hBorder = `${s.borderWidth}px solid ${s.borderColor}`;
+
+    let css = `/* WUMETAX TableCraft Scoped Styles (${ns}) */
+${ns} {
+  font-family: ${fontStack};
+  font-size: ${s.fontSize}px;
+  line-height: ${s.lineHeight};
+  color: ${s.bodyText};
+  margin: 1.25em 0;
+  box-sizing: border-box;
+}
+${ns} *, ${ns} *::before, ${ns} *::after {
+  box-sizing: border-box;
+}
+${ns} .tc-scroll-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: ${hBorder};
+  border-radius: ${s.borderRadius}px;
+  background: ${s.bodyBg};
+}
+${ns} table.tc-table {
+  width: ${s.tableWidth};
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: ${s.bodyBg};
+  color: ${s.bodyText};
+  margin: 0;
+}
+${ns} .tc-caption {
+  caption-side: top;
+  text-align: left;
+  padding: 12px 16px 8px 16px;
+  font-weight: 600;
+  font-size: 1.12em;
+  color: ${s.bodyText};
+}
+${ns} .tc-summary {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85em;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+${ns} th, ${ns} td {
+  padding: ${s.cellPadding};
+  border-bottom: ${hBorder};
+  border-right: ${vBorder};
+  vertical-align: middle;
+  ${wrapCss}
+}
+${ns} th:last-child, ${ns} td:last-child {
+  border-right: none;
+}
+${ns} tbody tr:last-child td, ${ns} tbody tr:last-child th {
+  border-bottom: none;
+}
+${ns} thead th {
+  background-color: ${s.headerBg};
+  color: ${s.headerText};
+  font-weight: 600;
+  border-bottom: ${Math.max(1, s.borderWidth)}px solid ${s.borderColor};
+}
+${s.zebra ? `${ns} tbody tr:nth-child(even) { background-color: ${s.stripeBg}; }` : ''}
+${s.hover ? `${ns} tbody tr:hover { background-color: ${s.hoverBg}; }` : ''}
+${s.firstColBold ? `${ns} tbody tr > *:first-child { font-weight: 600; }` : ''}
+${ns} .tc-align-left { text-align: left; }
+${ns} .tc-align-center { text-align: center; }
+${ns} .tc-align-right { text-align: right; font-variant-numeric: tabular-nums; }
+${ns} .tc-col-featured {
+  background-color: rgba(59, 130, 246, 0.06);
+  border-left: 2px solid ${s.accentColor};
+  border-right: 2px solid ${s.accentColor} !important;
+}
+${ns} .tc-rec-badge {
+  display: inline-block;
+  background: ${s.accentColor};
+  color: #ffffff;
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-bottom: 4px;
+}
+${ns} .tc-col-price {
+  font-weight: 700;
+  color: ${s.accentColor};
+  font-size: 1.08em;
+}
+${ns} .tc-col-highlight {
+  background-color: rgba(59, 130, 246, 0.04);
+}
+${ns} .tc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.86em;
+  font-weight: 500;
+}
+${ns} .tc-badge-pos { background: #DCFCE7; color: #166534; }
+${ns} .tc-badge-neg { background: #FEE2E2; color: #991B1B; }
+${ns} .tc-badge-neutral { background: #F3F4F6; color: #374151; }
+${ns} .tc-status-svg { width: 13px; height: 13px; flex-shrink: 0; }
+${ns} .tc-empty { opacity: 0.45; }
+${ns} .tc-footnote {
+  margin-top: 8px;
+  font-size: 0.85em;
+  opacity: 0.8;
+  white-space: pre-line;
+}
+${ns} a { color: ${s.accentColor}; text-decoration: underline; }
+`;
+
+    // RWD Mode Specific Media Queries
+    if (s.rwdMode === 'scroll') {
+      css += `@media (max-width: ${bp}px) {
+  ${ns} table.tc-table { min-width: ${minW}px; }
+}\n`;
+    } else if (s.rwdMode === 'stack') {
+      css += `@media (max-width: ${bp}px) {
+  ${ns} .tc-scroll-wrap { border: none; background: transparent; }
+  ${ns} table.tc-table, ${ns} tbody { display: block; width: 100%; }
+  ${ns} thead {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); border: 0;
+  }
+  ${ns} tbody tr {
+    display: block;
+    margin-bottom: 12px;
+    border: ${hBorder};
+    border-radius: ${s.borderRadius}px;
+    background: ${s.bodyBg};
+    padding: 4px 0;
+  }
+  ${ns} tbody td, ${ns} tbody th {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    text-align: right !important;
+    border-bottom: 1px solid ${s.borderColor};
+    border-right: none !important;
+    white-space: normal;
+    max-width: none;
+  }
+  ${ns} tbody td::before, ${ns} tbody th::before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-align: left;
+    color: ${s.bodyText};
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+}\n`;
+    } else if (s.rwdMode === 'priority') {
+      css += `${ns} .tc-priority-drawer-row { display: none; }
+@media (max-width: ${bp}px) {
+  ${ns} .tc-rwd-secondary { display: none !important; }
+  ${ns} .tc-priority-drawer-row { display: table-row; }
+  ${ns} .tc-priority-details {
+    font-size: 0.9em;
+    padding: 4px 0;
+  }
+  ${ns} .tc-priority-details summary {
+    cursor: pointer;
+    color: ${s.accentColor};
+    font-weight: 500;
+  }
+  ${ns} .tc-priority-dl {
+    margin: 6px 0 2px 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 12px;
+  }
+  ${ns} .tc-priority-dl dt { font-weight: 600; opacity: 0.85; }
+  ${ns} .tc-priority-dl dd { margin: 0; }
+}\n`;
+    }
+
+    return css;
+  }
+
+  function generateTableHtml(proj, options) {
+    const opts = options || {};
+    const inlineMode = !!opts.inlineMode;
+    const interactiveMode = !!opts.interactiveMode;
+    const rows = proj.rows || [];
+    const cols = proj.columns || [];
+    const s = proj.style;
+
+    if (rows.length === 0 || cols.length === 0) {
+      return '';
+    }
+
+    const hasHeader = proj.headerMode === 'firstRow' && rows.length > 0;
+    const headerRow = hasHeader ? rows[0] : cols.map((_, idx) => `欄位 ${idx + 1}`);
+    const bodyRows = hasHeader ? rows.slice(1) : rows;
+    const secondaryColIndices = [];
+    cols.forEach((c, idx) => {
+      if (c.rwdPriority === 'secondary') secondaryColIndices.push(idx);
+    });
+    const primaryColCount = Math.max(1, cols.length - secondaryColIndices.length);
+
+    let html = `<div class="${proj.tableUid}"${inlineMode ? ` style="font-family:sans-serif;font-size:${s.fontSize}px;line-height:${s.lineHeight};color:${s.bodyText};margin:1.25em 0;"` : ''}>\n`;
+
+    if (interactiveMode) {
+      html += `  <div class="tc-inter-bar" style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">\n`;
+      if (proj.exportConfig.interSearch) {
+        html += `    <input type="search" class="tc-inter-search" placeholder="搜尋表格內容..." aria-label="搜尋表格內容" style="padding:6px 10px;border:1px solid ${s.borderColor};border-radius:6px;font-size:14px;">\n`;
+      }
+      if (proj.exportConfig.interPage) {
+        html += `    <div class="tc-inter-pager" style="display:flex;align-items:center;gap:6px;font-size:13px;"></div>\n`;
+      }
+      html += `  </div>\n`;
+    }
+
+    html += `  <div class="tc-scroll-wrap"${inlineMode ? ` style="width:100%;overflow-x:auto;border:${s.borderWidth}px solid ${s.borderColor};border-radius:${s.borderRadius}px;background:${s.bodyBg};"` : ''}>\n`;
+    html += `    <table class="tc-table"${inlineMode ? ` style="width:${s.tableWidth};border-collapse:collapse;background:${s.bodyBg};color:${s.bodyText};"` : ''}>\n`;
+
+    // Caption & Summary
+    if ((s.caption && s.caption.trim()) || (s.summary && s.summary.trim())) {
+      html += `      <caption class="tc-caption"${inlineMode ? ` style="text-align:left;padding:12px 16px 8px;font-weight:600;font-size:1.1em;"` : ''}>`;
+      if (s.caption && s.caption.trim()) {
+        html += escapeHtml(s.caption.trim());
+      }
+      if (s.summary && s.summary.trim()) {
+        html += `<span class="tc-summary"${inlineMode ? ` style="display:block;font-weight:400;font-size:0.85em;opacity:0.8;"` : ''}>${escapeHtml(s.summary.trim())}</span>`;
+      }
+      html += `</caption>\n`;
+    }
+
+    // THEAD
+    if (hasHeader) {
+      html += `      <thead>\n        <tr>\n`;
+      headerRow.forEach((cellText, cIdx) => {
+        const colMeta = cols[cIdx] || createDefaultColumnMeta(cIdx);
+        const align = resolveColumnAlignment(colMeta);
+        const classes = [`tc-align-${align}`];
+        if (colMeta.specialRole === 'featured') classes.push('tc-col-featured');
+        if (s.rwdMode === 'priority' && colMeta.rwdPriority === 'secondary') classes.push('tc-rwd-secondary');
+
+        let badgeHtml = '';
+        if (colMeta.specialRole === 'featured' && colMeta.badgeText) {
+          badgeHtml = `<div class="tc-rec-badge"${inlineMode ? ` style="display:inline-block;background:${s.accentColor};color:#fff;font-size:11px;padding:2px 7px;border-radius:99px;margin-bottom:3px;"` : ''}>${escapeHtml(colMeta.badgeText)}</div><br>`;
+        }
+
+        const sortAttr = (interactiveMode && proj.exportConfig.interSort) ? ` data-tc-sort-col="${cIdx}" tabindex="0" role="button" style="cursor:pointer;"` : '';
+        const inlineThStyle = inlineMode
+          ? ` style="padding:${s.cellPadding};background:${s.headerBg};color:${s.headerText};text-align:${align};border-bottom:${s.borderWidth}px solid ${s.borderColor};"`
+          : '';
+
+        html += `          <th scope="col" class="${classes.join(' ')}"${sortAttr}${inlineThStyle}>${badgeHtml}${escapeHtml(cellText)}</th>\n`;
+      });
+      html += `        </tr>\n      </thead>\n`;
+    }
+
+    // TBODY
+    html += `      <tbody>\n`;
+    bodyRows.forEach((rowCells, rIdx) => {
+      const isEven = rIdx % 2 === 1;
+      const inlineTrStyle = (inlineMode && s.zebra && isEven) ? ` style="background:${s.stripeBg};"` : '';
+      html += `        <tr${inlineTrStyle}>\n`;
+
+      rowCells.forEach((rawVal, cIdx) => {
+        const colMeta = cols[cIdx] || createDefaultColumnMeta(cIdx);
+        const align = resolveColumnAlignment(colMeta);
+        const formatted = formatCellForDisplay(rawVal, colMeta, s);
+        const isRowHeader = proj.rowHeaderScope && cIdx === 0;
+        const tag = isRowHeader ? 'th' : 'td';
+        const scopeAttr = isRowHeader ? ' scope="row"' : '';
+        const colLabel = escapeHtml(headerRow[cIdx] || `欄位 ${cIdx + 1}`);
+        const titleAttr = (s.textWrap === 'ellipsis' && formatted.plainText) ? ` title="${escapeHtml(formatted.plainText)}"` : '';
+
+        const classes = [`tc-align-${align}`];
+        if (colMeta.specialRole === 'featured') classes.push('tc-col-featured');
+        else if (colMeta.specialRole === 'price') classes.push('tc-col-price');
+        else if (colMeta.specialRole === 'highlight') classes.push('tc-col-highlight');
+        if (s.rwdMode === 'priority' && colMeta.rwdPriority === 'secondary') classes.push('tc-rwd-secondary');
+
+        let inlineTdStyle = '';
+        if (inlineMode) {
+          const weight = (cIdx === 0 && s.firstColBold) || colMeta.specialRole === 'price' ? 'font-weight:600;' : '';
+          const colorOverride = colMeta.specialRole === 'price' ? `color:${s.accentColor};` : '';
+          inlineTdStyle = ` style="padding:${s.cellPadding};text-align:${align};border-bottom:${s.borderWidth}px solid ${s.borderColor};${weight}${colorOverride}"`;
+        }
+
+        html += `          <${tag}${scopeAttr} class="${classes.join(' ')}" data-label="${colLabel}"${titleAttr}${inlineTdStyle}>${formatted.html}</${tag}>\n`;
+      });
+
+      html += `        </tr>\n`;
+
+      // Priority Mode Expandable Drawer Row
+      if (s.rwdMode === 'priority' && secondaryColIndices.length > 0 && !inlineMode) {
+        html += `        <tr class="tc-priority-drawer-row">\n`;
+        html += `          <td colspan="${primaryColCount}">\n`;
+        html += `            <details class="tc-priority-details">\n`;
+        html += `              <summary>展開更多資訊 (${secondaryColIndices.length} 項)</summary>\n`;
+        html += `              <dl class="tc-priority-dl">\n`;
+        secondaryColIndices.forEach(secIdx => {
+          const secLabel = escapeHtml(headerRow[secIdx] || `欄位 ${secIdx + 1}`);
+          const secFormatted = formatCellForDisplay(rowCells[secIdx], cols[secIdx], s);
+          html += `                <dt>${secLabel}：</dt><dd>${secFormatted.html}</dd>\n`;
+        });
+        html += `              </dl>\n            </details>\n          </td>\n        </tr>\n`;
+      }
+    });
+    html += `      </tbody>\n    </table>\n  </div>\n`;
+
+    if (s.footnote && s.footnote.trim()) {
+      html += `  <div class="tc-footnote"${inlineMode ? ` style="margin-top:8px;font-size:0.85em;opacity:0.8;white-space:pre-line;"` : ''}>${escapeHtml(s.footnote.trim())}</div>\n`;
+    }
+
+    html += `</div>`;
+    return html;
+  }
+
+  function generateInteractiveScript(proj) {
+    const uid = proj.tableUid;
+    const pageSize = parseInt(proj.exportConfig.interPageSize, 10) || 10;
+    const enableSearch = !!proj.exportConfig.interSearch;
+    const enableSort = !!proj.exportConfig.interSort;
+    const enablePage = !!proj.exportConfig.interPage;
+
+    return `<script>
+(function(){
+  var root = document.querySelector('.${uid}');
+  if (!root) return;
+  var tbody = root.querySelector('tbody');
+  if (!tbody) return;
+  var allRows = Array.prototype.slice.call(tbody.querySelectorAll('tr:not(.tc-priority-drawer-row)'));
+  var searchInput = root.querySelector('.tc-inter-search');
+  var pagerBox = root.querySelector('.tc-inter-pager');
+  var pageSize = ${pageSize};
+  var currentPage = 1;
+  var filteredRows = allRows.slice();
+  var sortState = { col: -1, dir: 1 };
+
+  function parseCellVal(str) {
+    var clean = str.replace(/^(NT\\$|\\$|€|¥|\\s)+/i, '').replace(/,/g, '').replace(/%$/, '').trim();
+    if (clean !== '' && /^[-+]?\\d*(\\.\\d+)?$/.test(clean)) return parseFloat(clean);
+    return str.toLowerCase();
+  }
+
+  function renderTableState() {
+    var total = filteredRows.length;
+    var totalPages = ${enablePage} ? Math.max(1, Math.ceil(total / pageSize)) : 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    var start = ${enablePage} ? (currentPage - 1) * pageSize : 0;
+    var end = ${enablePage} ? start + pageSize : total;
+
+    allRows.forEach(function(r){ r.style.display = 'none'; });
+    filteredRows.slice(start, end).forEach(function(r){
+      r.style.display = '';
+      tbody.appendChild(r);
+    });
+
+    if (${enablePage} && pagerBox) {
+      pagerBox.innerHTML = '';
+      var info = document.createElement('span');
+      info.textContent = '共 ' + total + ' 筆｜第 ' + currentPage + ' / ' + totalPages + ' 頁';
+      var prevBtn = document.createElement('button');
+      prevBtn.type = 'button'; prevBtn.textContent = '上一頁';
+      prevBtn.disabled = currentPage <= 1;
+      prevBtn.onclick = function(){ currentPage--; renderTableState(); };
+      var nextBtn = document.createElement('button');
+      nextBtn.type = 'button'; nextBtn.textContent = '下一頁';
+      nextBtn.disabled = currentPage >= totalPages;
+      nextBtn.onclick = function(){ currentPage++; renderTableState(); };
+      pagerBox.appendChild(info);
+      pagerBox.appendChild(prevBtn);
+      pagerBox.appendChild(nextBtn);
+    }
+  }
+
+  if (${enableSearch} && searchInput) {
+    searchInput.addEventListener('input', function(){
+      var q = searchInput.value.trim().toLowerCase();
+      filteredRows = allRows.filter(function(r){
+        return !q || r.textContent.toLowerCase().indexOf(q) !== -1;
+      });
+      currentPage = 1;
+      renderTableState();
+    });
+  }
+
+  if (${enableSort}) {
+    var ths = root.querySelectorAll('thead th[data-tc-sort-col]');
+    Array.prototype.forEach.call(ths, function(th){
+      function triggerSort() {
+        var cIdx = parseInt(th.getAttribute('data-tc-sort-col'), 10);
+        if (sortState.col === cIdx) sortState.dir *= -1;
+        else { sortState.col = cIdx; sortState.dir = 1; }
+        filteredRows.sort(function(a, b){
+          var cellA = a.children[cIdx] ? a.children[cIdx].textContent.trim() : '';
+          var cellB = b.children[cIdx] ? b.children[cIdx].textContent.trim() : '';
+          var vA = parseCellVal(cellA), vB = parseCellVal(cellB);
+          if (typeof vA === 'number' && typeof vB === 'number') return (vA - vB) * sortState.dir;
+          return String(vA).localeCompare(String(vB), 'zh-Hant') * sortState.dir;
+        });
+        renderTableState();
+      }
+      th.addEventListener('click', triggerSort);
+      th.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerSort(); }
+      });
+    });
+  }
+
+  renderTableState();
+})();
+<\/script>`;
+  }
+
+  function buildExportOutput(proj) {
+    const mode = proj.exportConfig.mode || 'wp';
+    const css = generateScopedCss(proj);
+
+    if (mode === 'wp') {
+      const html = generateTableHtml(proj, { inlineMode: false, interactiveMode: false });
+      return `<style>\n${css}</style>\n\n${html}`;
+    }
+    if (mode === 'inline') {
+      return generateTableHtml(proj, { inlineMode: true, interactiveMode: false });
+    }
+    if (mode === 'standalone') {
+      const html = generateTableHtml(proj, { inlineMode: false, interactiveMode: false });
+      const title = escapeHtml(proj.style.caption || proj.name || 'WUMETAX TableCraft 表格');
+      return `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title}</title>
+<style>
+body { margin: 0; padding: 24px; background: #F9FAFB; font-family: sans-serif; }
+.page-container { max-width: 1080px; margin: 0 auto; background: #FFFFFF; padding: 24px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+${css}
+</style>
+</head>
+<body>
+<div class="page-container">
+${html}
+</div>
+</body>
+</html>`;
+    }
+    if (mode === 'interactive') {
+      const html = generateTableHtml(proj, { inlineMode: false, interactiveMode: true });
+      const script = generateInteractiveScript(proj);
+      return `<style>\n${css}</style>\n\n${html}\n\n${script}`;
+    }
+    return '';
+  }
+
+  /* =========================================================
+   * 6. RENDERING WORKSTATION UI (GRID, PREVIEW, INSPECTOR)
+   * ========================================================= */
+  const TYPE_LABELS = {
+    text: '文字', number: '數字', currency: '金額', percent: '百分比',
+    date: '日期', url: '網址', email: '信箱', status: '狀態'
+  };
+
+  function renderEditorGrid() {
+    const proj = getActiveProject();
+    const thead = document.getElementById('editorGridHead');
+    const tbody = document.getElementById('editorGridBody');
+    const rows = proj.rows;
+    const cols = proj.columns;
+
+    // Ensure column metadata matches row width
+    const colCount = rows.length > 0 ? rows[0].length : cols.length;
+    while (proj.columns.length < colCount) {
+      proj.columns.push(createDefaultColumnMeta(proj.columns.length));
+    }
+    if (proj.columns.length > colCount && colCount > 0) {
+      proj.columns.length = colCount;
+    }
+
+    if (App.activeColIdx >= colCount) App.activeColIdx = Math.max(0, colCount - 1);
+    if (App.activeRowIdx >= rows.length) App.activeRowIdx = Math.max(0, rows.length - 1);
+
+    // Build THEAD (Column controls)
+    let headHtml = `<tr><th class="row-num-col">#</th>`;
+    for (let c = 0; c < colCount; c++) {
+      const meta = proj.columns[c];
+      const isSelectedCol = c === App.activeColIdx;
+      const colLetter = String.fromCharCode(65 + (c % 26)) + (c >= 26 ? Math.floor(c / 26) : '');
+      const roleTag = meta.specialRole === 'featured' ? ' [推薦]' : (meta.specialRole === 'price' ? ' [價格]' : '');
+      headHtml += `<th class="${isSelectedCol ? 'selected-col' : ''}" data-col-idx="${c}">
+        <div class="col-header-box">
+          <div class="col-header-top">
+            <span class="col-title-badge">欄 ${colLetter}${escapeHtml(roleTag)}</span>
+            <span style="font-size:11px;color:var(--text-muted)">${meta.rwdPriority === 'secondary' ? '手機收合' : ''}</span>
+          </div>
+          <button type="button" class="col-type-badge" data-select-col="${c}">
+            <span>型別：${TYPE_LABELS[meta.type] || '文字'}</span>
+            <span>⚙</span>
+          </button>
+        </div>
+      </th>`;
+    }
+    headHtml += `</tr>`;
+    thead.innerHTML = headHtml;
+
+    // Determine pagination slice for large tables
+    const totalRows = rows.length;
+    const totalPages = Math.max(1, Math.ceil(totalRows / App.gridPageSize));
+    if (App.gridPage >= totalPages) App.gridPage = totalPages - 1;
+    const startRow = App.gridPage * App.gridPageSize;
+    const endRow = Math.min(totalRows, startRow + App.gridPageSize);
+
+    const pagerWrap = document.getElementById('gridPaginationWrap');
+    if (totalRows > App.gridPageSize) {
+      pagerWrap.style.display = 'flex';
+      document.getElementById('gridPageInfo').textContent = `${App.gridPage + 1} / ${totalPages} (第 ${startRow + 1}-${endRow} 列)`;
+    } else {
+      pagerWrap.style.display = 'none';
+    }
+
+    document.getElementById('gridDimensionInfo').textContent = `共 ${totalRows} 列 × ${colCount} 欄 ${proj.headerMode === 'firstRow' ? '(第 1 列為標題列)' : ''}`;
+
+    // Build TBODY
+    let bodyHtml = '';
+    for (let r = startRow; r < endRow; r++) {
+      const isHeaderRow = proj.headerMode === 'firstRow' && r === 0;
+      const isSelectedRow = r === App.activeRowIdx;
+      const rowClasses = [];
+      if (isHeaderRow) rowClasses.push('is-header-row');
+      if (isSelectedRow) rowClasses.push('selected-row');
+
+      bodyHtml += `<tr class="${rowClasses.join(' ')}" data-row-idx="${r}">`;
+      bodyHtml += `<td class="row-num-col" data-row-select="${r}" title="${isHeaderRow ? '標題列' : '第 ' + (r + 1) + ' 列'}">${isHeaderRow ? '標題' : (r + 1)}</td>`;
+
+      for (let c = 0; c < colCount; c++) {
+        const val = rows[r][c] !== undefined ? rows[r][c] : '';
+        const isSelectedCol = c === App.activeColIdx;
+        bodyHtml += `<td class="${isSelectedCol ? 'selected-col' : ''}">
+          <div class="cell-wrap">
+            <textarea class="cell-input" rows="1" data-r="${r}" data-c="${c}" aria-label="第 ${r + 1} 列第 ${c + 1} 欄">${escapeHtml(val)}</textarea>
+          </div>
+        </td>`;
+      }
+      bodyHtml += `</tr>`;
+    }
+    tbody.innerHTML = bodyHtml;
+
+    // Populate Search Column Select
+    const searchColSelect = document.getElementById('searchColSelect');
+    const prevSearchVal = searchColSelect.value;
+    let searchOptHtml = `<option value="all">全部欄位</option>`;
+    for (let c = 0; c < colCount; c++) {
+      const label = (proj.headerMode === 'firstRow' && rows[0] && rows[0][c]) ? rows[0][c] : `第 ${c + 1} 欄`;
+      searchOptHtml += `<option value="${c}">${escapeHtml(label)}</option>`;
+    }
+    searchColSelect.innerHTML = searchOptHtml;
+    if (prevSearchVal) searchColSelect.value = prevSearchVal;
+  }
+
+  function renderColumnInspector() {
+    const proj = getActiveProject();
+    const cIdx = App.activeColIdx;
+    const colMeta = proj.columns[cIdx];
+    if (!colMeta) return;
+
+    const headerTitle = (proj.headerMode === 'firstRow' && proj.rows[0] && proj.rows[0][cIdx])
+      ? proj.rows[0][cIdx]
+      : `第 ${cIdx + 1} 欄`;
+    document.getElementById('colInspectorHeading').textContent = `欄位格式設定：第 ${cIdx + 1} 欄（${headerTitle}）`;
+
+    document.getElementById('colTypeSelect').value = colMeta.type || 'text';
+    document.getElementById('colAlignSelect').value = colMeta.align || 'auto';
+    document.getElementById('colCurrencySymbol').value = colMeta.currency !== undefined ? colMeta.currency : 'NT$';
+    document.getElementById('colDecimalsSelect').value = String(colMeta.decimals || 0);
+    document.getElementById('colDateFormatSelect').value = colMeta.dateFormat || 'YYYY-MM-DD';
+    document.getElementById('colRwdPrioritySelect').value = colMeta.rwdPriority || 'primary';
+    document.getElementById('colSpecialRoleSelect').value = colMeta.specialRole || 'none';
+    document.getElementById('colBadgeTextInput').value = colMeta.badgeText || '推薦方案';
+
+    document.getElementById('colCurrencyWrap').style.display = colMeta.type === 'currency' ? 'flex' : 'none';
+    document.getElementById('colDecimalsWrap').style.display = ['number', 'currency', 'percent'].includes(colMeta.type) ? 'flex' : 'none';
+    document.getElementById('colDateWrap').style.display = colMeta.type === 'date' ? 'flex' : 'none';
+    document.getElementById('colBadgeTextWrap').style.display = colMeta.specialRole === 'featured' ? 'flex' : 'none';
+  }
+
+  function renderPreviewAndCode() {
+    const proj = getActiveProject();
+    const styleMount = document.getElementById('previewScopedStyle');
+    const tableMount = document.getElementById('previewTableMount');
+
+    // Check if table is completely empty
+    const hasAnyContent = proj.rows.length > 0 && proj.rows.some(r => r.some(cell => String(cell).trim() !== ''));
+
+    if (proj.rows.length === 0) {
+      styleMount.textContent = '';
+      tableMount.innerHTML = `<div class="preview-empty-state">目前表格沒有任何資料列，請在左側新增列或匯入 Excel / CSV 資料。</div>`;
+    } else {
+      styleMount.textContent = generateScopedCss(proj);
+      tableMount.innerHTML = generateTableHtml(proj, { inlineMode: false, interactiveMode: false });
+      if (!hasAnyContent) {
+        const hint = document.createElement('div');
+        hint.style.cssText = 'font-size:12px;color:#6B7280;text-align:center;margin-top:8px;';
+        hint.textContent = '提示：目前為空白儲存格狀態，於左側輸入文字後將即時顯示於此。';
+        tableMount.appendChild(hint);
+      }
+    }
+
+    // Update Code Box
+    document.getElementById('namespaceBadge').textContent = '.' + proj.tableUid;
+    document.getElementById('generatedCodeOutput').value = buildExportOutput(proj);
+  }
+
+  function renderAll() {
+    renderEditorGrid();
+    renderColumnInspector();
+    renderPreviewAndCode();
+    if (App.autoSave) saveToLocalStorage(false);
+  }
+
+  /* =========================================================
+   * 7. SYNC UI CONTROLS WITH PROJECT STATE
+   * ========================================================= */
+  function syncAllUIFromProject() {
+    const proj = getActiveProject();
+    if (!proj) return;
+
+    // Project selector & name
+    const projSelect = document.getElementById('projectSelect');
+    projSelect.innerHTML = App.projects.map(p => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.name)}</option>`).join('');
+    projSelect.value = proj.id;
+    document.getElementById('projectNameInput').value = proj.name;
+
+    // Header & Semantics
+    document.getElementById('headerModeSelect').value = proj.headerMode || 'firstRow';
+    document.getElementById('chkRowHeaderScope').checked = !!proj.rowHeaderScope;
+
+    // Style Preset Active Button
+    const s = proj.style;
+    document.querySelectorAll('#presetGrid .preset-card').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-preset') === s.preset);
+    });
+
+    // Color inputs
+    const colorPairs = [
+      ['colorHeaderBg', 'hexHeaderBg', s.headerBg],
+      ['colorHeaderText', 'hexHeaderText', s.headerText],
+      ['colorBodyBg', 'hexBodyBg', s.bodyBg],
+      ['colorBodyText', 'hexBodyText', s.bodyText],
+      ['colorStripeBg', 'hexStripeBg', s.stripeBg],
+      ['colorHoverBg', 'hexHoverBg', s.hoverBg],
+      ['colorBorder', 'hexBorder', s.borderColor],
+      ['colorAccent', 'hexAccent', s.accentColor]
+    ];
+    colorPairs.forEach(([cId, hId, val]) => {
+      if (val && /^#[0-9A-Fa-f]{6}$/.test(val)) {
+        document.getElementById(cId).value = val;
+      }
+      document.getElementById(hId).value = val || '';
+    });
+
+    // Checkboxes
+    document.getElementById('chkZebraStripe').checked = !!s.zebra;
+    document.getElementById('chkHoverRow').checked = !!s.hover;
+    document.getElementById('chkShowVerticalBorder').checked = !!s.verticalBorder;
+    document.getElementById('chkFirstColBold').checked = !!s.firstColBold;
+
+    // RWD
+    document.querySelectorAll('input[name="rwdModeRadio"]').forEach(r => {
+      r.checked = (r.value === (s.rwdMode || 'scroll'));
+    });
+    document.getElementById('rwdBreakpointInput').value = s.rwdBreakpoint || 640;
+    document.getElementById('rwdMinWidthInput').value = s.rwdMinWidth || 560;
+
+    // Typography & Sizing
+    document.getElementById('fontFamilySelect').value = s.fontFamily || 'sans';
+    document.getElementById('fontSizeInput').value = s.fontSize || 15;
+    document.getElementById('lineHeightSelect').value = s.lineHeight || '1.6';
+    document.getElementById('textWrapSelect').value = s.textWrap || 'wrap';
+    document.getElementById('tableWidthSelect').value = s.tableWidth || '100%';
+    document.getElementById('cellPaddingSelect').value = s.cellPadding || '12px 16px';
+    document.getElementById('borderWidthInput').value = s.borderWidth !== undefined ? s.borderWidth : 1;
+    document.getElementById('borderRadiusInput').value = s.borderRadius !== undefined ? s.borderRadius : 8;
+
+    // Meta & Empty values
+    document.getElementById('tableCaptionInput').value = s.caption || '';
+    document.getElementById('tableSummaryInput').value = s.summary || '';
+    document.getElementById('tableFootnoteInput').value = s.footnote || '';
+    document.getElementById('emptyCellModeSelect').value = s.emptyCellMode || 'dash';
+    document.getElementById('emptyCellCustomInput').value = s.emptyCellCustom || '無';
+    document.getElementById('emptyCellCustomWrap').style.display = s.emptyCellMode === 'custom' ? 'flex' : 'none';
+    document.getElementById('chkStatusSvgIcon').checked = s.statusSvgIcon !== false;
+
+    // Export config
+    const exp = proj.exportConfig;
+    document.querySelectorAll('.export-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-export-mode') === exp.mode);
+    });
+    document.getElementById('chkCsvFormulaSafe').checked = exp.csvFormulaSafe !== false;
+    document.getElementById('chkInterSearch').checked = exp.interSearch !== false;
+    document.getElementById('chkInterSort').checked = exp.interSort !== false;
+    document.getElementById('chkInterPage').checked = exp.interPage !== false;
+    document.getElementById('interPageSizeSelect').value = String(exp.interPageSize || 10);
+    updateExportNotice(exp.mode);
+  }
+
+  function updateExportNotice(mode) {
+    const notice = document.getElementById('exportModeNotice');
+    const interBar = document.getElementById('interactiveOptionsBar');
+    interBar.style.display = mode === 'interactive' ? 'flex' : 'none';
+
+    if (mode === 'wp') {
+      notice.className = 'notice-box notice-info';
+      notice.innerHTML = '<strong>WordPress Gutenberg 最佳化模式：</strong>包含語意化 <code>&lt;table&gt;</code> 與獨立命名空間 <code>&lt;style&gt;</code>，不依賴 JavaScript。若您的網站權限會過濾 style 標籤，請點擊「僅複製 CSS」貼至外觀 → 自訂 → 額外 CSS。';
+    } else if (mode === 'inline') {
+      notice.className = 'notice-box notice-info';
+      notice.innerHTML = '<strong>純 HTML + 行內樣式模式：</strong>將主要色彩與邊框直接寫入 HTML 元素的 <code>style</code> 屬性中，適合無法插入 <code>&lt;style&gt;</code> 標籤的受限編輯器或電子報環境。';
+    } else if (mode === 'standalone') {
+      notice.className = 'notice-box notice-info';
+      notice.innerHTML = '<strong>獨立 HTML 網頁版：</strong>包含完整 <code>&lt;!DOCTYPE html&gt;</code>、RWD Meta 與頁面容器，下載 <code>.html</code> 後可直接用瀏覽器開啟檢視或部署。';
+    } else if (mode === 'interactive') {
+      notice.className = 'notice-box notice-warn';
+      notice.innerHTML = '<strong>進階互動版注意：</strong>此模式包含原生 JavaScript 以支援前台即時搜尋、點擊表頭排序與分頁。若要嵌入 WordPress，請確認您的帳號具備 <code>unfiltered_html</code> 權限且安全性外掛允許執行內嵌 Script。';
+    }
+  }
+
+  /* =========================================================
+   * 8. LOCAL STORAGE & PROJECT MANAGEMENT
+   * ========================================================= */
+  function saveToLocalStorage(showToastMsg) {
+    try {
+      const payload = JSON.stringify({
+        activeProjectId: App.activeProjectId,
+        autoSave: App.autoSave,
+        projects: App.projects
+      });
+      localStorage.setItem(STORAGE_KEY, payload);
+      const timeStr = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+      document.getElementById('saveStatusText').textContent = `已儲存 (${timeStr})`;
+      if (showToastMsg) showToast('專案與樣式設定已儲存至本機', 'success');
+    } catch (err) {
+      document.getElementById('saveStatusText').textContent = '本機儲存失敗 (空間已滿)';
+      showToast('本機儲存空間不足，請匯出 JSON 備份檔案！', 'error');
+    }
+  }
+
+  function loadFromLocalStorage() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.projects) && parsed.projects.length > 0) {
+          App.projects = parsed.projects;
+          App.activeProjectId = parsed.activeProjectId || parsed.projects[0].id;
+          App.autoSave = parsed.autoSave !== false;
+          document.getElementById('chkAutoSave').checked = App.autoSave;
+          return;
+        }
+      }
+    } catch (e) {
+      // Fallback to demo project
+    }
+    const demo = createDemoProject();
+    App.projects = [demo];
+    App.activeProjectId = demo.id;
+  }
+
+  /* =========================================================
+   * 9. TOAST NOTIFICATION HELPER
+   * ========================================================= */
+  function showToast(msg, type) {
+    const container = document.getElementById('toastContainer');
+    const item = document.createElement('div');
+    item.className = 'toast-item ' + (type || 'info');
+    item.textContent = msg;
+    container.appendChild(item);
+    setTimeout(() => {
+      if (item.parentNode) item.parentNode.removeChild(item);
+    }, 3200);
+  }
+
+  /* =========================================================
+   * 10. EVENT BINDINGS & INTERACTIVE CONTROLLERS
+   * ========================================================= */
+  function bindEvents() {
+    // Mobile Tab Switching
+    document.querySelectorAll('.mobile-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.mobile-tabs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('workspaceRoot').setAttribute('data-mobile-view', btn.getAttribute('data-mobile-tab'));
+      });
+    });
+
+    // Right Panel Style Tabs
+    document.querySelectorAll('.settings-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.settings-tabs button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        const target = 'styleTab-' + btn.getAttribute('data-style-tab');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    // Undo / Redo
+    document.getElementById('btnUndo').addEventListener('click', () => {
+      if (App.historyIndex > 0) {
+        App.historyIndex--;
+        restoreSnapshot(App.history[App.historyIndex]);
+        updateUndoRedoButtons();
+      }
+    });
+    document.getElementById('btnRedo').addEventListener('click', () => {
+      if (App.historyIndex < App.history.length - 1) {
+        App.historyIndex++;
+        restoreSnapshot(App.history[App.historyIndex]);
+        updateUndoRedoButtons();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !e.shiftKey) {
+        if (document.activeElement && document.activeElement.tagName === 'TEXTAREA' && !document.activeElement.classList.contains('cell-input')) return;
+        e.preventDefault();
+        document.getElementById('btnUndo').click();
+      } else if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) {
+        e.preventDefault();
+        document.getElementById('btnRedo').click();
+      }
+    });
+
+    // Project Bar Actions
+    document.getElementById('projectSelect').addEventListener('change', (e) => {
+      App.activeProjectId = e.target.value;
+      App.activeRowIdx = 0;
+      App.activeColIdx = 0;
+      App.history = [];
+      App.historyIndex = -1;
+      syncAllUIFromProject();
+      pushHistory();
+      renderAll();
+    });
+
+    document.getElementById('projectNameInput').addEventListener('input', (e) => {
+      const proj = getActiveProject();
+      proj.name = e.target.value.trim() || '未命名表格專案';
+      const opt = document.querySelector(`#projectSelect option[value="${proj.id}"]`);
+      if (opt) opt.textContent = proj.name;
+      if (App.autoSave) saveToLocalStorage(false);
+    });
+
+    document.getElementById('btnNewProject').addEventListener('click', () => {
+      const newProj = createDemoProject();
+      newProj.id = 'proj_' + Date.now().toString(36);
+      newProj.tableUid = generateStableId('wmt-tc');
+      newProj.name = '新表格專案 ' + (App.projects.length + 1);
+      newProj.rows = [
+        ['欄位標題 1', '欄位標題 2', '欄位標題 3', '欄位標題 4'],
+        ['範例內容 A1', '1200', '支援', '備註說明'],
+        ['範例內容 A2', '3500', '支援', '備註說明'],
+        ['範例內容 A3', '5800', '不支援', '備註說明']
+      ];
+      newProj.columns = [
+        createDefaultColumnMeta(0),
+        createDefaultColumnMeta(1, { type: 'currency' }),
+        createDefaultColumnMeta(2, { type: 'status' }),
+        createDefaultColumnMeta(3)
+      ];
+      App.projects.push(newProj);
+      App.activeProjectId = newProj.id;
+      App.history = [];
+      App.historyIndex = -1;
+      syncAllUIFromProject();
+      pushHistory();
+      renderAll();
+      showToast('已建立新表格專案', 'success');
+    });
+
+    document.getElementById('btnDuplicateProject').addEventListener('click', () => {
+      const cur = getActiveProject();
+      const copy = cloneDeep(cur);
+      copy.id = 'proj_' + Date.now().toString(36);
+      copy.tableUid = generateStableId('wmt-tc');
+      copy.name = cur.name + ' (副本)';
+      App.projects.push(copy);
+      App.activeProjectId = copy.id;
+      syncAllUIFromProject();
+      pushHistory();
+      renderAll();
+      showToast('已複製目前專案', 'success');
+    });
+
+    document.getElementById('btnDeleteProject').addEventListener('click', () => {
+      if (App.projects.length <= 1) {
+        showToast('至少需保留一個專案，您可使用「清空表格」重設內容。', 'warn');
+        return;
+      }
+      if (!confirm('確定要刪除目前專案嗎？此操作無法復原。')) return;
+      App.projects = App.projects.filter(p => p.id !== App.activeProjectId);
+      App.activeProjectId = App.projects[0].id;
+      syncAllUIFromProject();
+      pushHistory();
+      renderAll();
+      showToast('專案已刪除', 'info');
+    });
+
+    document.getElementById('btnLoadDemo').addEventListener('click', () => {
+      if (!confirm('載入範例將會取代目前專案的表格內容與樣式，確定要載入嗎？')) return;
+      const demo = createDemoProject();
+      const cur = getActiveProject();
+      cur.rows = demo.rows;
+      cur.columns = demo.columns;
+      cur.headerMode = demo.headerMode;
+      cur.rowHeaderScope = demo.rowHeaderScope;
+      cur.style = demo.style;
+      syncAllUIFromProject();
+      pushHistory();
+      renderAll();
+      showToast('已載入 WordPress 網站收費比較表範例', 'success');
+    });
+
+    document.getElementById('btnSaveProject').addEventListener('click', () => {
+      saveToLocalStorage(true);
+    });
+
+    // Grid Cell Input & Keyboard Navigation Delegation
+    const editorGrid = document.getElementById('editorGrid');
+
+    editorGrid.addEventListener('focusin', (e) => {
+      const target = e.target;
+      if (target.classList.contains('cell-input')) {
+        const r = parseInt(target.getAttribute('data-r'), 10);
+        const c = parseInt(target.getAttribute('data-c'), 10);
+        const colChanged = c !== App.activeColIdx;
+        App.activeRowIdx = r;
+        App.activeColIdx = c;
+        // Highlight active row/col headers without destroying DOM focus
+        editorGrid.querySelectorAll('.selected-row').forEach(el => el.classList.remove('selected-row'));
+        editorGrid.querySelectorAll('.selected-col').forEach(el => el.classList.remove('selected-col'));
+        const tr = target.closest('tr');
+        if (tr) tr.classList.add('selected-row');
+        if (colChanged) renderColumnInspector();
+      }
+    });
+
+    editorGrid.addEventListener('input', (e) => {
+      const target = e.target;
+      if (target.classList.contains('cell-input')) {
+        const r = parseInt(target.getAttribute('data-r'), 10);
+        const c = parseInt(target.getAttribute('data-c'), 10);
+        const proj = getActiveProject();
+        if (proj.rows[r]) {
+          proj.rows[r][c] = target.value;
+          // Partial live update without rebuilding grid DOM
+          renderPreviewAndCode();
+          if (r === 0 && proj.headerMode === 'firstRow') {
+            renderColumnInspector();
+          }
+        }
+      }
+    });
+
+    editorGrid.addEventListener('change', (e) => {
+      if (e.target.classList.contains('cell-input')) {
+        pushHistory();
+        if (App.autoSave) saveToLocalStorage(false);
+      }
+    });
+
+    // Multi-cell Excel Paste directly inside a Grid Cell
+    editorGrid.addEventListener('paste', (e) => {
+      const target = e.target;
+      if (!target.classList.contains('cell-input')) return;
+      const clipText = (e.clipboardData || window.clipboardData).getData('text');
+      if (!clipText || (!clipText.includes('\t') && !clipText.includes('\n'))) return;
+
+      const parsed = parseDelimitedText(clipText, 'auto');
+      if (parsed.length <= 1 && parsed[0].length <= 1) return;
+
+      e.preventDefault();
+      const startR = parseInt(target.getAttribute('data-r'), 10);
+      const startC = parseInt(target.getAttribute('data-c'), 10);
+      const proj = getActiveProject();
+
+      // Expand rows and columns if needed
+      const reqRows = startR + parsed.length;
+      const reqCols = startC + parsed[0].length;
+      const curCols = proj.rows[0] ? proj.rows[0].length : 0;
+
+      if (reqCols > curCols) {
+        const addCols = reqCols - curCols;
+        for (let r = 0; r < proj.rows.length; r++) {
+          for (let k = 0; k < addCols; k++) proj.rows[r].push('');
+        }
+        for (let k = 0; k < addCols; k++) {
+          proj.columns.push(createDefaultColumnMeta(proj.columns.length));
+        }
+      }
+      while (proj.rows.length < reqRows) {
+        proj.rows.push(new Array(proj.columns.length).fill(''));
+      }
+
+      for (let r = 0; r < parsed.length; r++) {
+        for (let c = 0; c < parsed[r].length; c++) {
+          proj.rows[startR + r][startC + c] = parsed[r][c];
+        }
+      }
+
+      pushHistory();
+      renderAll();
+      showToast(`已從儲存格貼上 ${parsed.length} 列 × ${parsed[0].length} 欄資料`, 'success');
+    });
+
+    // Keyboard navigation inside grid
+    editorGrid.addEventListener('keydown', (e) => {
+      const target = e.target;
+      if (!target.classList.contains('cell-input')) return;
+      const r = parseInt(target.getAttribute('data-r'), 10);
+      const c = parseInt(target.getAttribute('data-c'), 10);
+      const proj = getActiveProject();
+      const maxR = proj.rows.length - 1;
+      const maxC = proj.columns.length - 1;
+
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        const nextR = Math.min(maxR, r + 1);
+        const nextInput = editorGrid.querySelector(`.cell-input[data-r="${nextR}"][data-c="${c}"]`);
+        if (nextInput) { nextInput.focus(); nextInput.select(); }
+      } else if (e.key === 'Escape') {
+        target.blur();
+      } else if (e.key === 'ArrowUp' && !e.altKey) {
+        e.preventDefault();
+        const nextInput = editorGrid.querySelector(`.cell-input[data-r="${Math.max(0, r - 1)}"][data-c="${c}"]`);
+        if (nextInput) { nextInput.focus(); nextInput.select(); }
+      } else if (e.key === 'ArrowDown' && !e.altKey) {
+        e.preventDefault();
+        const nextInput = editorGrid.querySelector(`.cell-input[data-r="${Math.min(maxR, r + 1)}"][data-c="${c}"]`);
+        if (nextInput) { nextInput.focus(); nextInput.select(); }
+      }
+    });
+
+    // Click column header button or row number
+    editorGrid.addEventListener('click', (e) => {
+      const colBtn = e.target.closest('[data-select-col]');
+      if (colBtn) {
+        App.activeColIdx = parseInt(colBtn.getAttribute('data-select-col'), 10);
+        renderEditorGrid();
+        renderColumnInspector();
+        return;
+      }
+      const rowCell = e.target.closest('[data-row-select]');
+      if (rowCell) {
+        App.activeRowIdx = parseInt(rowCell.getAttribute('data-row-select'), 10);
+        renderEditorGrid();
+      }
+    });
+
+    // Grid Pagination Buttons
+    document.getElementById('btnGridPrevPage').addEventListener('click', () => {
+      if (App.gridPage > 0) { App.gridPage--; renderEditorGrid(); }
+    });
+    document.getElementById('btnGridNextPage').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const maxPage = Math.ceil(proj.rows.length / App.gridPageSize) - 1;
+      if (App.gridPage < maxPage) { App.gridPage++; renderEditorGrid(); }
+    });
+
+    // Row & Column Management Buttons
+    document.getElementById('btnInsertRowAbove').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const cols = proj.columns.length || 4;
+      proj.rows.splice(App.activeRowIdx, 0, new Array(cols).fill(''));
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnInsertRowBelow').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const cols = proj.columns.length || 4;
+      proj.rows.splice(App.activeRowIdx + 1, 0, new Array(cols).fill(''));
+      App.activeRowIdx++;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnDuplicateRow').addEventListener('click', () => {
+      const proj = getActiveProject();
+      if (!proj.rows[App.activeRowIdx]) return;
+      const copy = proj.rows[App.activeRowIdx].slice();
+      proj.rows.splice(App.activeRowIdx + 1, 0, copy);
+      App.activeRowIdx++;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnMoveRowUp').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const r = App.activeRowIdx;
+      if (r <= 0 || r >= proj.rows.length) return;
+      const temp = proj.rows[r - 1];
+      proj.rows[r - 1] = proj.rows[r];
+      proj.rows[r] = temp;
+      App.activeRowIdx = r - 1;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnMoveRowDown').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const r = App.activeRowIdx;
+      if (r < 0 || r >= proj.rows.length - 1) return;
+      const temp = proj.rows[r + 1];
+      proj.rows[r + 1] = proj.rows[r];
+      proj.rows[r] = temp;
+      App.activeRowIdx = r + 1;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnDeleteRow').addEventListener('click', () => {
+      const proj = getActiveProject();
+      if (proj.rows.length <= 1) {
+        showToast('表格至少需保留一列', 'warn'); return;
+      }
+      proj.rows.splice(App.activeRowIdx, 1);
+      if (App.activeRowIdx >= proj.rows.length) App.activeRowIdx = proj.rows.length - 1;
+      pushHistory(); renderAll();
+    });
+
+    document.getElementById('btnInsertColLeft').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const c = App.activeColIdx;
+      proj.rows.forEach(r => r.splice(c, 0, ''));
+      proj.columns.splice(c, 0, createDefaultColumnMeta(c));
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnInsertColRight').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const c = App.activeColIdx + 1;
+      proj.rows.forEach(r => r.splice(c, 0, ''));
+      proj.columns.splice(c, 0, createDefaultColumnMeta(c));
+      App.activeColIdx = c;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnMoveColLeft').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const c = App.activeColIdx;
+      if (c <= 0) return;
+      proj.rows.forEach(r => {
+        const tmp = r[c - 1]; r[c - 1] = r[c]; r[c] = tmp;
+      });
+      const tmpMeta = proj.columns[c - 1];
+      proj.columns[c - 1] = proj.columns[c];
+      proj.columns[c] = tmpMeta;
+      App.activeColIdx = c - 1;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnMoveColRight').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const c = App.activeColIdx;
+      if (c >= proj.columns.length - 1) return;
+      proj.rows.forEach(r => {
+        const tmp = r[c + 1]; r[c + 1] = r[c]; r[c] = tmp;
+      });
+      const tmpMeta = proj.columns[c + 1];
+      proj.columns[c + 1] = proj.columns[c];
+      proj.columns[c] = tmpMeta;
+      App.activeColIdx = c + 1;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('btnDeleteCol').addEventListener('click', () => {
+      const proj = getActiveProject();
+      if (proj.columns.length <= 1) {
+        showToast('表格至少需保留一欄', 'warn'); return;
+      }
+      const c = App.activeColIdx;
+      proj.rows.forEach(r => r.splice(c, 1));
+      proj.columns.splice(c, 1);
+      if (App.activeColIdx >= proj.columns.length) App.activeColIdx = proj.columns.length - 1;
+      pushHistory(); renderAll();
+    });
+
+    // Clear & Quick Resize Blank Table
+    document.getElementById('btnClearTable').addEventListener('click', () => {
+      if (!confirm('確定要清空目前表格的所有內容嗎？（可按復原恢復）')) return;
+      const proj = getActiveProject();
+      proj.rows = proj.rows.map(r => r.map(() => ''));
+      pushHistory(); renderAll();
+      showToast('已清空表格內容', 'info');
+    });
+
+    document.getElementById('btnQuickResize').addEventListener('click', () => {
+      const rCount = Math.min(500, Math.max(1, parseInt(document.getElementById('quickRowsInput').value, 10) || 5));
+      const cCount = Math.min(30, Math.max(1, parseInt(document.getElementById('quickColsInput').value, 10) || 4));
+      const proj = getActiveProject();
+      const hasData = proj.rows.some(r => r.some(cell => String(cell).trim() !== ''));
+      if (hasData && !confirm(`將建立 ${rCount} 列 × ${cCount} 欄的空白表格並取代現有內容，確定嗎？`)) return;
+
+      const newRows = [];
+      for (let r = 0; r < rCount; r++) {
+        const row = [];
+        for (let c = 0; c < cCount; c++) {
+          row.push(r === 0 && proj.headerMode === 'firstRow' ? `欄位 ${c + 1}` : '');
+        }
+        newRows.push(row);
+      }
+      proj.rows = newRows;
+      proj.columns = Array.from({ length: cCount }, (_, i) => createDefaultColumnMeta(i));
+      App.activeRowIdx = 0;
+      App.activeColIdx = 0;
+      pushHistory(); renderAll();
+      showToast(`已建立 ${rCount} 列 × ${cCount} 欄空白表格`, 'success');
+    });
+
+    // Header Semantics
+    document.getElementById('headerModeSelect').addEventListener('change', (e) => {
+      const proj = getActiveProject();
+      proj.headerMode = e.target.value;
+      pushHistory(); renderAll();
+    });
+    document.getElementById('chkRowHeaderScope').addEventListener('change', (e) => {
+      const proj = getActiveProject();
+      proj.rowHeaderScope = e.target.checked;
+      pushHistory(); renderAll();
+    });
+
+    // Column Inspector Controls
+    const bindColMeta = (id, prop, transform) => {
+      document.getElementById(id).addEventListener('change', (e) => {
+        const proj = getActiveProject();
+        const col = proj.columns[App.activeColIdx];
+        if (!col) return;
+        col[prop] = transform ? transform(e.target.value) : e.target.value;
+        pushHistory();
+        renderAll();
+      });
+    };
+    bindColMeta('colTypeSelect', 'type');
+    bindColMeta('colAlignSelect', 'align');
+    bindColMeta('colCurrencySymbol', 'currency');
+    bindColMeta('colDecimalsSelect', 'decimals', v => parseInt(v, 10));
+    bindColMeta('colDateFormatSelect', 'dateFormat');
+    bindColMeta('colRwdPrioritySelect', 'rwdPriority');
+    bindColMeta('colSpecialRoleSelect', 'specialRole');
+
+    document.getElementById('colBadgeTextInput').addEventListener('input', (e) => {
+      const proj = getActiveProject();
+      const col = proj.columns[App.activeColIdx];
+      if (!col) return;
+      col.badgeText = e.target.value;
+      renderPreviewAndCode();
+    });
+
+    // Column Sorting (Smart Numeric / Date / Text with Header Preservation)
+    function sortActiveColumn(dir) {
+      const proj = getActiveProject();
+      const cIdx = App.activeColIdx;
+      if (proj.rows.length <= 1) return;
+
+      const hasHeader = proj.headerMode === 'firstRow';
+      const header = hasHeader ? proj.rows[0] : null;
+      const dataRows = hasHeader ? proj.rows.slice(1) : proj.rows.slice();
+
+      dataRows.sort((rowA, rowB) => {
+        const rawA = rowA[cIdx] !== undefined ? String(rowA[cIdx]).trim() : '';
+        const rawB = rowB[cIdx] !== undefined ? String(rowB[cIdx]).trim() : '';
+        if (rawA === '' && rawB === '') return 0;
+        if (rawA === '') return 1;
+        if (rawB === '') return -1;
+
+        const numA = parseNumericValue(rawA);
+        const numB = parseNumericValue(rawB);
+        if (!isNaN(numA) && !isNaN(numB)) {
+          return (numA - numB) * dir;
+        }
+        return rawA.localeCompare(rawB, 'zh-Hant', { numeric: true }) * dir;
+      });
+
+      proj.rows = hasHeader ? [header, ...dataRows] : dataRows;
+      pushHistory();
+      renderAll();
+      showToast(`已依第 ${cIdx + 1} 欄完成${dir === 1 ? '升冪' : '降冪'}排序（可按復原恢復）`, 'success');
+    }
+
+    document.getElementById('btnSortAsc').addEventListener('click', () => sortActiveColumn(1));
+    document.getElementById('btnSortDesc').addEventListener('click', () => sortActiveColumn(-1));
+
+    // Search & Replace
+    document.getElementById('btnToggleSearch').addEventListener('click', () => {
+      document.getElementById('searchDrawer').classList.toggle('open');
+    });
+
+    function getSearchMatches() {
+      const query = document.getElementById('searchInput').value;
+      if (!query) return [];
+      const caseSens = document.getElementById('searchCaseSensitive').checked;
+      const colFilter = document.getElementById('searchColSelect').value;
+      const proj = getActiveProject();
+      const matches = [];
+      const qTarget = caseSens ? query : query.toLowerCase();
+
+      proj.rows.forEach((row, rIdx) => {
+        row.forEach((cell, cIdx) => {
+          if (colFilter !== 'all' && String(cIdx) !== colFilter) return;
+          const text = String(cell);
+          const hay = caseSens ? text : text.toLowerCase();
+          if (hay.includes(qTarget)) {
+            matches.push({ r: rIdx, c: cIdx });
+          }
+        });
+      });
+      return matches;
+    }
+
+    document.getElementById('btnFindMatches').addEventListener('click', () => {
+      const matches = getSearchMatches();
+      document.getElementById('searchMatchCount').textContent = `找到 ${matches.length} 個相符儲存格`;
+      if (matches.length > 0) {
+        App.activeRowIdx = matches[0].r;
+        App.activeColIdx = matches[0].c;
+        App.gridPage = Math.floor(App.activeRowIdx / App.gridPageSize);
+        renderEditorGrid();
+        const el = document.querySelector(`.cell-input[data-r="${App.activeRowIdx}"][data-c="${App.activeColIdx}"]`);
+        if (el) el.focus();
+      }
+    });
+
+    document.getElementById('btnReplaceOne').addEventListener('click', () => {
+      const matches = getSearchMatches();
+      if (matches.length === 0) {
+        showToast('找不到符合的搜尋內容', 'warn'); return;
+      }
+      const query = document.getElementById('searchInput').value;
+      const rep = document.getElementById('replaceInput').value;
+      const caseSens = document.getElementById('searchCaseSensitive').checked;
+      const proj = getActiveProject();
+      const m = matches[0];
+      const flags = caseSens ? '' : 'i';
+      const escapedQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      proj.rows[m.r][m.c] = String(proj.rows[m.r][m.c]).replace(new RegExp(escapedQ, flags), rep);
+      pushHistory(); renderAll();
+      document.getElementById('searchMatchCount').textContent = `已取代 1 筆，剩餘 ${matches.length - 1} 筆`;
+    });
+
+    document.getElementById('btnReplaceAll').addEventListener('click', () => {
+      const matches = getSearchMatches();
+      if (matches.length === 0) {
+        showToast('找不到符合的搜尋內容', 'warn'); return;
+      }
+      if (!confirm(`即將取代共 ${matches.length} 個儲存格內的相符文字，確定要執行全部取代嗎？`)) return;
+      const query = document.getElementById('searchInput').value;
+      const rep = document.getElementById('replaceInput').value;
+      const caseSens = document.getElementById('searchCaseSensitive').checked;
+      const proj = getActiveProject();
+      const flags = caseSens ? 'g' : 'gi';
+      const escapedQ = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(escapedQ, flags);
+
+      matches.forEach(m => {
+        proj.rows[m.r][m.c] = String(proj.rows[m.r][m.c]).replace(regex, rep);
+      });
+      pushHistory(); renderAll();
+      document.getElementById('searchMatchCount').textContent = `已完成 ${matches.length} 筆取代`;
+      showToast(`已成功取代 ${matches.length} 個儲存格`, 'success');
+    });
+
+    // Style Presets & Custom Colors
+    document.querySelectorAll('#presetGrid .preset-card').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-preset');
+        const presetObj = STYLE_PRESETS[key];
+        if (!presetObj) return;
+        const proj = getActiveProject();
+        Object.assign(proj.style, presetObj, { preset: key });
+        syncAllUIFromProject();
+        pushHistory();
+        renderPreviewAndCode();
+      });
+    });
+
+    function bindColorPair(colorId, hexId, styleProp) {
+      const cInput = document.getElementById(colorId);
+      const hInput = document.getElementById(hexId);
+      cInput.addEventListener('input', () => {
+        hInput.value = cInput.value.toUpperCase();
+        getActiveProject().style[styleProp] = hInput.value;
+        renderPreviewAndCode();
+      });
+      cInput.addEventListener('change', () => pushHistory());
+      hInput.addEventListener('input', () => {
+        const val = hInput.value.trim();
+        if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+          cInput.value = val;
+          getActiveProject().style[styleProp] = val.toUpperCase();
+          renderPreviewAndCode();
+        }
+      });
+      hInput.addEventListener('change', () => pushHistory());
+    }
+
+    bindColorPair('colorHeaderBg', 'hexHeaderBg', 'headerBg');
+    bindColorPair('colorHeaderText', 'hexHeaderText', 'headerText');
+    bindColorPair('colorBodyBg', 'hexBodyBg', 'bodyBg');
+    bindColorPair('colorBodyText', 'hexBodyText', 'bodyText');
+    bindColorPair('colorStripeBg', 'hexStripeBg', 'stripeBg');
+    bindColorPair('colorHoverBg', 'hexHoverBg', 'hoverBg');
+    bindColorPair('colorBorder', 'hexBorder', 'borderColor');
+    bindColorPair('colorAccent', 'hexAccent', 'accentColor');
+
+    // Style Checkboxes & Selects
+    const bindStyleCheck = (id, prop) => {
+      document.getElementById(id).addEventListener('change', (e) => {
+        getActiveProject().style[prop] = e.target.checked;
+        pushHistory(); renderPreviewAndCode();
+      });
+    };
+    bindStyleCheck('chkZebraStripe', 'zebra');
+    bindStyleCheck('chkHoverRow', 'hover');
+    bindStyleCheck('chkShowVerticalBorder', 'verticalBorder');
+    bindStyleCheck('chkFirstColBold', 'firstColBold');
+    bindStyleCheck('chkStatusSvgIcon', 'statusSvgIcon');
+
+    // RWD Radios & Inputs
+    document.querySelectorAll('input[name="rwdModeRadio"]').forEach(r => {
+      r.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          getActiveProject().style.rwdMode = e.target.value;
+          pushHistory(); renderPreviewAndCode();
+        }
+      });
+    });
+
+    const bindStyleValue = (id, prop, isNum) => {
+      document.getElementById(id).addEventListener('input', (e) => {
+        const val = isNum ? (parseInt(e.target.value, 10) || 0) : e.target.value;
+        getActiveProject().style[prop] = val;
+        if (id === 'emptyCellModeSelect') {
+          document.getElementById('emptyCellCustomWrap').style.display = val === 'custom' ? 'flex' : 'none';
+        }
+        renderPreviewAndCode();
+      });
+      document.getElementById(id).addEventListener('change', () => pushHistory());
+    };
+
+    bindStyleValue('rwdBreakpointInput', 'rwdBreakpoint', true);
+    bindStyleValue('rwdMinWidthInput', 'rwdMinWidth', true);
+    bindStyleValue('fontFamilySelect', 'fontFamily', false);
+    bindStyleValue('fontSizeInput', 'fontSize', true);
+    bindStyleValue('lineHeightSelect', 'lineHeight', false);
+    bindStyleValue('textWrapSelect', 'textWrap', false);
+    bindStyleValue('tableWidthSelect', 'tableWidth', false);
+    bindStyleValue('cellPaddingSelect', 'cellPadding', false);
+    bindStyleValue('borderWidthInput', 'borderWidth', true);
+    bindStyleValue('borderRadiusInput', 'borderRadius', true);
+    bindStyleValue('tableCaptionInput', 'caption', false);
+    bindStyleValue('tableSummaryInput', 'summary', false);
+    bindStyleValue('tableFootnoteInput', 'footnote', false);
+    bindStyleValue('emptyCellModeSelect', 'emptyCellMode', false);
+    bindStyleValue('emptyCellCustomInput', 'emptyCellCustom', false);
+
+    // Viewport Width Switcher (Real container width simulation)
+    document.querySelectorAll('.viewport-switcher button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.viewport-switcher button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const vp = btn.getAttribute('data-vp');
+        document.getElementById('previewViewport').style.width = vp;
+        document.getElementById('customViewportInput').value = '';
+      });
+    });
+
+    document.getElementById('customViewportInput').addEventListener('input', (e) => {
+      const px = parseInt(e.target.value, 10);
+      if (px >= 280 && px <= 1920) {
+        document.querySelectorAll('.viewport-switcher button').forEach(b => b.classList.remove('active'));
+        document.getElementById('previewViewport').style.width = px + 'px';
+      }
+    });
+
+    // Print Table
+    document.getElementById('btnPrintTable').addEventListener('click', () => {
+      window.print();
+    });
+
+    // Export Mode Tabs & Copy / Download Actions
+    document.querySelectorAll('.export-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.export-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.getAttribute('data-export-mode');
+        const proj = getActiveProject();
+        proj.exportConfig.mode = mode;
+        updateExportNotice(mode);
+        renderPreviewAndCode();
+      });
+    });
+
+    ['chkInterSearch', 'chkInterSort', 'chkInterPage'].forEach(id => {
+      document.getElementById(id).addEventListener('change', (e) => {
+        const key = id.replace('chk', '');
+        const prop = key.charAt(0).toLowerCase() + key.slice(1);
+        getActiveProject().exportConfig[prop] = e.target.checked;
+        renderPreviewAndCode();
+      });
+    });
+    document.getElementById('interPageSizeSelect').addEventListener('change', (e) => {
+      getActiveProject().exportConfig.interPageSize = parseInt(e.target.value, 10) || 10;
+      renderPreviewAndCode();
+    });
+    document.getElementById('chkCsvFormulaSafe').addEventListener('change', (e) => {
+      getActiveProject().exportConfig.csvFormulaSafe = e.target.checked;
+    });
+
+    function copyTextWithFallback(text, label) {
+      const codeArea = document.getElementById('generatedCodeOutput');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(`已複製 ${label} 至剪貼簿！`, 'success');
+        }).catch(() => {
+          codeArea.value = text;
+          codeArea.focus();
+          codeArea.select();
+          showToast('瀏覽器限制自動剪貼簿，已為您全選程式碼，請按 Ctrl+C 複製', 'warn');
+        });
+      } else {
+        codeArea.value = text;
+        codeArea.focus();
+        codeArea.select();
+        try {
+          document.execCommand('copy');
+          showToast(`已複製 ${label} 至剪貼簿！`, 'success');
+        } catch (err) {
+          showToast('請直接在下方程式碼框按 Ctrl+C 複製', 'warn');
+        }
+      }
+    }
+
+    document.getElementById('btnCopyCombined').addEventListener('click', () => {
+      const code = buildExportOutput(getActiveProject());
+      copyTextWithFallback(code, '完整表格程式碼');
+    });
+    document.getElementById('btnCopyHtmlOnly').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const html = generateTableHtml(proj, {
+        inlineMode: proj.exportConfig.mode === 'inline',
+        interactiveMode: proj.exportConfig.mode === 'interactive'
+      });
+      copyTextWithFallback(html, 'HTML 表格結構');
+    });
+    document.getElementById('btnCopyCssOnly').addEventListener('click', () => {
+      const css = generateScopedCss(getActiveProject());
+      copyTextWithFallback(css, '獨立命名空間 CSS');
+    });
+    document.getElementById('btnSelectAllCode').addEventListener('click', () => {
+      const codeArea = document.getElementById('generatedCodeOutput');
+      codeArea.focus();
+      codeArea.select();
+      showToast('已全選程式碼，請按 Ctrl+C (或 Cmd+C) 複製', 'info');
+    });
+
+    // Blob File Downloads (HTML / CSV / JSON)
+    function triggerBlobDownload(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 200);
+    }
+
+    function getSafeFilename(proj, ext) {
+      const base = (proj.name || 'tablecraft').replace(/[\\/:*?"<>|]/g, '_').trim() || 'tablecraft';
+      return `${base}.${ext}`;
+    }
+
+    document.getElementById('btnDownloadHtml').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const prevMode = proj.exportConfig.mode;
+      const isInter = prevMode === 'interactive';
+      const css = generateScopedCss(proj);
+      const html = generateTableHtml(proj, { inlineMode: false, interactiveMode: isInter });
+      const script = isInter ? generateInteractiveScript(proj) : '';
+      const title = escapeHtml(proj.style.caption || proj.name || 'WUMETAX TableCraft');
+
+      const fullDoc = `<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title}</title>
+<style>
+body { margin: 0; padding: 24px; background: #F3F4F6; font-family: sans-serif; }
+.container { max-width: 1120px; margin: 0 auto; background: #FFFFFF; padding: 24px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+${css}
+</style>
+</head>
+<body>
+<div class="container">
+${html}
+</div>
+${script}
+</body>
+</html>`;
+      triggerBlobDownload(fullDoc, getSafeFilename(proj, 'html'), 'text/html;charset=utf-8');
+      showToast('已下載獨立 HTML 網頁檔', 'success');
+    });
+
+    document.getElementById('btnDownloadCsv').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const safeFormula = proj.exportConfig.csvFormulaSafe !== false;
+      const csvLines = proj.rows.map(row => {
+        return row.map(cell => {
+          let str = cell === null || cell === undefined ? '' : String(cell);
+          if (safeFormula && /^[=+\-@]/.test(str)) {
+            str = "'" + str;
+          }
+          if (str.includes('"') || str.includes(',') || str.includes('\n') || str.includes('\r')) {
+            return '"' + str.replace(/"/g, '""') + '"';
+          }
+          return str;
+        }).join(',');
+      });
+      // Prepend UTF-8 BOM \uFEFF so Excel on Windows/Mac opens Chinese characters properly
+      const csvContent = '\uFEFF' + csvLines.join('\r\n');
+      triggerBlobDownload(csvContent, getSafeFilename(proj, 'csv'), 'text/csv;charset=utf-8');
+      showToast('已下載 UTF-8 BOM 格式 CSV 檔案', 'success');
+    });
+
+    document.getElementById('btnExportJson').addEventListener('click', () => {
+      const proj = getActiveProject();
+      const jsonStr = JSON.stringify(proj, null, 2);
+      triggerBlobDownload(jsonStr, getSafeFilename(proj, 'json'), 'application/json;charset=utf-8');
+      showToast('已匯出專案 JSON 備份檔', 'success');
+    });
+
+    document.getElementById('btnImportJsonTrigger').addEventListener('click', () => {
+      document.getElementById('jsonFileInput').click();
+    });
+
+    document.getElementById('jsonFileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          if (!parsed || !Array.isArray(parsed.rows) || !Array.isArray(parsed.columns)) {
+            throw new Error('JSON 結構缺少 rows 或 columns');
+          }
+          // Sanitize structure
+          parsed.id = 'proj_' + Date.now().toString(36);
+          parsed.tableUid = parsed.tableUid && /^wmt-tc-[a-z0-9]+$/.test(parsed.tableUid) ? parsed.tableUid : generateStableId('wmt-tc');
+          parsed.name = String(parsed.name || '匯入專案').slice(0, 80);
+          parsed.rows = parsed.rows.map(r => Array.isArray(r) ? r.map(c => String(c ?? '')) : []);
+          App.projects.push(parsed);
+          App.activeProjectId = parsed.id;
+          syncAllUIFromProject();
+          pushHistory();
+          renderAll();
+          showToast('已成功匯入 JSON 專案備份', 'success');
+        } catch (err) {
+          showToast('JSON 備份檔格式不正確，無法匯入：' + err.message, 'error');
+        }
+        e.target.value = '';
+      };
+      reader.readAsText(file, 'UTF-8');
+    });
+
+    // Storage Privacy Controls
+    document.getElementById('chkAutoSave').addEventListener('change', (e) => {
+      App.autoSave = e.target.checked;
+      document.getElementById('saveStatusText').textContent = App.autoSave ? '自動儲存已開啟' : '自動儲存已關閉';
+    });
+
+    document.getElementById('btnWipeAllStorage').addEventListener('click', () => {
+      if (!confirm('確定要清除瀏覽器本機儲存的所有 TableCraft 專案與設定嗎？此動作無法復原。')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      const demo = createDemoProject();
+      App.projects = [demo];
+      App.activeProjectId = demo.id;
+      App.history = [];
+      App.historyIndex = -1;
+      syncAllUIFromProject();
+      pushHistory();
+      renderAll();
+      document.getElementById('saveStatusText').textContent = '已清除所有本機資料';
+      showToast('已清除瀏覽器中所有儲存的資料', 'info');
+    });
+
+    /* =========================================================
+     * 11. IMPORT MODAL CONTROLLER (EXCEL / CSV / TSV)
+     * ========================================================= */
+    const importModal = document.getElementById('importModal');
+    const importTextarea = document.getElementById('importRawTextarea');
+    const delimiterSelect = document.getElementById('importDelimiterSelect');
+
+    function updateImportPreview() {
+      const raw = importTextarea.value;
+      const previewSec = document.getElementById('importPreviewSection');
+      if (!raw || !raw.trim()) {
+        App.parsedImportRows = [];
+        previewSec.style.display = 'none';
+        return;
+      }
+      const rows = parseDelimitedText(raw, delimiterSelect.value);
+      App.parsedImportRows = rows;
+      if (rows.length === 0) {
+        previewSec.style.display = 'none';
+        return;
+      }
+      previewSec.style.display = 'block';
+      const colCount = rows[0].length;
+      document.getElementById('importStatsText').textContent = `${rows.length} 列 × ${colCount} 欄`;
+
+      const curCols = getActiveProject().columns.length;
+      const warnBadge = document.getElementById('importWarningBadge');
+      if (colCount !== curCols) {
+        warnBadge.textContent = `提示：匯入欄數 (${colCount}) 與目前表格欄數 (${curCols}) 不同，若選擇「新增至下方」將自動補齊欄數。`;
+      } else {
+        warnBadge.textContent = '';
+      }
+
+      // Render top 8 rows in preview
+      const sample = rows.slice(0, 8);
+      let tbl = `<table style="width:100%;border-collapse:collapse;font-size:12px;">`;
+      sample.forEach((r, idx) => {
+        tbl += `<tr style="background:${idx === 0 ? '#F3F4F6' : '#fff'};font-weight:${idx === 0 ? '600' : '400'};">`;
+        r.forEach(c => {
+          tbl += `<td style="border:1px solid #E5E7EB;padding:4px 8px;white-space:pre-wrap;">${escapeHtml(c)}</td>`;
+        });
+        tbl += `</tr>`;
+      });
+      if (rows.length > 8) {
+        tbl += `<tr><td colspan="${colCount}" style="padding:6px;text-align:center;color:#6B7280;">... 還有 ${rows.length - 8} 列資料 ...</td></tr>`;
+      }
+      tbl += `</table>`;
+      document.getElementById('importPreviewTableWrap').innerHTML = tbl;
+    }
+
+    document.getElementById('btnOpenImportModal').addEventListener('click', () => {
+      importModal.classList.add('open');
+      importTextarea.focus();
+    });
+    document.getElementById('btnCloseImportModal').addEventListener('click', () => {
+      importModal.classList.remove('open');
+    });
+    importModal.addEventListener('click', (e) => {
+      if (e.target === importModal) importModal.classList.remove('open');
+    });
+
+    importTextarea.addEventListener('input', updateImportPreview);
+    delimiterSelect.addEventListener('change', updateImportPreview);
+
+    document.getElementById('btnReadClipboard').addEventListener('click', () => {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(text => {
+          if (!text) {
+            showToast('剪貼簿目前沒有文字內容', 'warn'); return;
+          }
+          importTextarea.value = text;
+          updateImportPreview();
+          showToast('已成功讀取剪貼簿內容', 'success');
+        }).catch(() => {
+          importTextarea.focus();
+          showToast('瀏覽器權限限制自動讀取，請在文字框內按 Ctrl+V 貼上', 'warn');
+        });
+      } else {
+        importTextarea.focus();
+        showToast('請直接在文字框內按 Ctrl+V 貼上', 'info');
+      }
+    });
+
+    document.getElementById('csvFileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (/\.xlsx?$/i.test(file.name)) {
+        showToast('請將 Excel 檔案另存為 CSV UTF-8，或直接從 Excel 選取儲存格複製貼上！', 'warn');
+        e.target.value = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const content = ev.target.result;
+        if (!content || !String(content).trim()) {
+          showToast('所選檔案為空白檔案，未變更現有表格', 'error');
+          return;
+        }
+        importTextarea.value = content;
+        if (/\.tsv$/i.test(file.name)) delimiterSelect.value = 'tab';
+        else if (/\.csv$/i.test(file.name)) delimiterSelect.value = 'comma';
+        else delimiterSelect.value = 'auto';
+        updateImportPreview();
+        showToast(`已載入檔案：${file.name}`, 'success');
+        e.target.value = '';
+      };
+      reader.onerror = () => {
+        showToast('讀取檔案失敗，請確認檔案編碼是否為 UTF-8', 'error');
+      };
+      reader.readAsText(file, 'UTF-8');
+    });
+
+    document.getElementById('btnReplaceImport').addEventListener('click', () => {
+      if (!App.parsedImportRows || App.parsedImportRows.length === 0) {
+        showToast('請先貼上或選擇有效的表格資料', 'warn'); return;
+      }
+      const proj = getActiveProject();
+      const newRows = cloneDeep(App.parsedImportRows);
+      const colCount = newRows[0].length;
+      proj.rows = newRows;
+      proj.columns = Array.from({ length: colCount }, (_, idx) => createDefaultColumnMeta(idx));
+      App.activeRowIdx = 0;
+      App.activeColIdx = 0;
+      App.gridPage = 0;
+      pushHistory();
+      renderAll();
+      importModal.classList.remove('open');
+      showToast(`已成功匯入並取代為 ${newRows.length} 列 × ${colCount} 欄表格`, 'success');
+    });
+
+    document.getElementById('btnAppendImport').addEventListener('click', () => {
+      if (!App.parsedImportRows || App.parsedImportRows.length === 0) {
+        showToast('請先貼上或選擇有效的表格資料', 'warn'); return;
+      }
+      const proj = getActiveProject();
+      const incoming = cloneDeep(App.parsedImportRows);
+      const maxCols = Math.max(proj.columns.length, incoming[0].length);
+
+      while (proj.columns.length < maxCols) {
+        proj.columns.push(createDefaultColumnMeta(proj.columns.length));
+      }
+      proj.rows.forEach(r => {
+        while (r.length < maxCols) r.push('');
+      });
+      incoming.forEach(r => {
+        while (r.length < maxCols) r.push('');
+        proj.rows.push(r);
+      });
+
+      pushHistory();
+      renderAll();
+      importModal.classList.remove('open');
+      showToast(`已新增 ${incoming.length} 列資料至目前表格下方`, 'success');
+    });
+  }
+
+  /* =========================================================
+   * 12. INITIALIZATION
+   * ========================================================= */
+  function init() {
+    loadFromLocalStorage();
+    syncAllUIFromProject();
+    pushHistory();
+    bindEvents();
+    renderAll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
