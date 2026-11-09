@@ -1,0 +1,49 @@
+name: Apply reviewed TableCraft upgrade
+on:
+  push:
+    branches: [tablecraft-neutral-demo-fixes]
+    paths:
+      - scripts/apply_upgrade.py
+      - scripts/features.js
+      - .github/workflows/tablecraft-upgrade.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tablecraft-neutral-demo-upgrade
+  cancel-in-progress: false
+jobs:
+  upgrade:
+    if: github.ref == 'refs/heads/tablecraft-neutral-demo-fixes'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: tablecraft-neutral-demo-fixes
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply reviewed edits
+        run: python scripts/apply_upgrade.py
+      - name: Check generated application syntax
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          source = Path('index.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script>([\s\S]*?)</script>', source)
+          Path('/tmp/tablecraft-check.js').write_text(scripts[-1], encoding='utf-8')
+          PY
+          node --check /tmp/tablecraft-check.js
+      - name: Commit generated index only to the review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: apply neutral demo, safer imports and editor upgrades'
+            git push origin HEAD:tablecraft-neutral-demo-fixes
+          fi
