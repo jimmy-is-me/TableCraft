@@ -1,0 +1,57 @@
+name: Publish neutral demo and migrate legacy defaults
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-neutral-demo.yml]
+permissions:
+  contents: write
+concurrency:
+  group: tablecraft-main-privacy-update
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply verified neutral version and migrate only exact legacy demo rows
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          import re
+          expected = 'c4f2f66038c8a048af344e4c6334c1839b435d95'
+          current = subprocess.check_output(['git', 'hash-object', 'index.html'], text=True).strip()
+          if current != expected:
+              raise SystemExit('main index.html changed; refusing to overwrite newer edits')
+          source = subprocess.check_output(['git', 'show', '0c83ee4802653e8bf18920c75f34a8e4d495b5fe:index.html']).decode('utf-8')
+          migration = "  async function migrateLegacyDemo() {\n    try {\n      if (!globalThis.crypto || !crypto.subtle) return;\n      let changed = false;\n      for (let i = 0; i < App.projects.length; i++) {\n        const old = App.projects[i];\n        const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(old.rows)));\n        const hash = Array.from(new Uint8Array(digest), n => n.toString(16).padStart(2, '0')).join('');\n        if (hash !== '618ad4cf6c3fa2e0835abb7f4f4f028abb6682b72630497733a7eece0674096c') continue;\n        const neutral = createDemoProject();\n        neutral.id = old.id;\n        neutral.tableUid = old.tableUid;\n        App.projects[i] = neutral;\n        changed = true;\n      }\n      if (changed) {\n        const raw = localStorage.getItem(STORAGE_KEY);\n        if (raw) {\n          const store = JSON.parse(raw);\n          store.projects = App.projects;\n          localStorage.setItem(STORAGE_KEY, JSON.stringify(store));\n        }\n      }\n    } catch (error) {\n      console.warn('TableCraft legacy demo migration could not be persisted.', error);\n    }\n  }\n"
+          anchor = '  function init() {'
+          call = '    loadFromLocalStorage();'
+          if source.count(anchor) != 1 or source.count(call) != 1:
+              raise SystemExit('Unexpected init anchors; aborting')
+          source = source.replace(anchor, migration + '\n  async function init() {', 1)
+          source = source.replace(call, call + '\n    await migrateLegacyDemo();', 1)
+          Path('index.html').write_text(source, encoding='utf-8')
+          js = re.findall(r'<script>([\s\S]*?)</script>', source)[-1]
+          Path('/tmp/tablecraft-privacy-check.js').write_text(js, encoding='utf-8')
+          PY
+          node --check /tmp/tablecraft-privacy-check.js
+      - name: Commit updated index to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: publish neutral demo and replace exact legacy default projects'
+            git push origin HEAD:main
+          fi
